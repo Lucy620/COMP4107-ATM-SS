@@ -1,8 +1,6 @@
 package ATMSS.CashDispenserHandler.Emulator;
-
-import ATMSS.ATMSSStarter;
 import ATMSS.CashDispenserHandler.CashDispenserHandler;
-
+import ATMSS.ATMSSStarter;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,7 +40,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
         cashDispenserEmulatorController.initialize(id, atmssStarter, log, this);
         myStage.initStyle(StageStyle.DECORATED);
         myStage.setScene(new Scene(root, 350, 470));
-        myStage.setTitle("Card Reader");
+        myStage.setTitle("Card Dispenser");
         myStage.setResizable(false);
         myStage.setOnCloseRequest((WindowEvent event) -> {
             atmssStarter.stopApp();
@@ -50,24 +48,4 @@ public class CashDispenserEmulator extends CashDispenserHandler {
         });
         myStage.show();
     } // CardDispenserEmulator
-
-
-    //------------------------------------------------------------
-    // handleCashDispense
-    protected void handleCashDispense() {
-        // fixme
-        super.handleCashDispense();
-        cashDispenserEmulatorController.appendTextArea("Cash Dispensed");
-        cashDispenserEmulatorController.updateCardStatus("Cash Dispensed");
-    } // handleCardInsert
-
-
-    //------------------------------------------------------------
-    // handleCashRemove
-    protected void handleCashRemove() {
-        // fixme
-        super.handleCashRemove();
-        cashDispenserEmulatorController.appendTextArea("Card Ejected");
-        cashDispenserEmulatorController.updateCardStatus("Card Ejected");
-    } // handleCashRemove
 } // CardDispenserEmulator

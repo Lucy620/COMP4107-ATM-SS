@@ -1,8 +1,5 @@
 package ATMSS;
 
-import ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulator;
-import ATMSS.CashDispenserHandler.CashDispenserHandler;
-import ATMSS.CashDispenserHandler.Emulator.CashDispenserEmulator;
 import AppKickstarter.timer.Timer;
 
 import ATMSS.ATMSS.ATMSS;
@@ -12,10 +9,11 @@ import ATMSS.KeypadHandler.KeypadHandler;
 import ATMSS.KeypadHandler.Emulator.KeypadEmulator;
 import ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulator;
 import ATMSS.TouchDisplayHandler.TouchDisplayHandler;
-import ATMSS.AdvicePrinterHandler.AdvicePrinterHandler;
 import ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulator;
+import ATMSS.AdvicePrinterHandler.AdvicePrinterHandler;
 import ATMSS.CashCollector.Emulator.CashCollectorEmulator;
 import ATMSS.CashCollector.CashCollectorHandler;
+import ATMSS.CashDispenserHandler.Emulator.CashDispenserEmulator;
 import ATMSS.CashDispenserHandler.CashDispenserHandler;
 import javafx.application.Application;
 import javafx.application.Platform;
