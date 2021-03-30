@@ -1,4 +1,10 @@
 package ATMSS;
+import ATMSS.BAMSHandler.BAMSHandler;
+import ATMSS.BAMSHandler.BAMSInvalidReplyException;
+
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.logging.*;
 
 import ATMSS.AdvicePrinterHandler.AdvicePrinterHandler;
 import ATMSS.CashDispenserHandler.CashDispenserHandler;
@@ -35,8 +41,28 @@ public class ATMSSStarter extends AppKickstarter {
     // main
     public static void main(String [] args) {
         new ATMSSStarter().startApp();
+		String urlPrefix = "http://cslinux0.comp.hkbu.edu.hk/comp4107_20-21_grp06/";
+		BAMSHandler bams = new BAMSHandler(urlPrefix);
+
+		try{
+			testLogin(bams);
+		}catch (Exception e){
+			System.out.println("TestBAMSHandler: Exception caught: " + e.getMessage());
+			e.printStackTrace();
+		}
     } // main
 
+	static void testLogin(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+		System.out.println("Login:");
+		try{
+		    String cred = bams.login("123-3456-789", "123456");
+		    System.out.println("cred: " + cred);
+		}catch(Exception e){
+			System.out.println("TestBAMSHandler: Exception caught: " + e.getMessage());
+		}
+
+		System.out.println();
+	} // testLogin
 
     //------------------------------------------------------------
     // ATMStart
