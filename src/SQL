@@ -1,0 +1,16 @@
+CREATE TABLE users(
+cardNo char(12),
+pin char(6),
+accountNo char(12),
+cred char(10),
+amount real,
+PRIMARY KEY(cardNo,accountNo)
+);
+
+INSERT INTO users VALUES ('123-456-789','123456','123','cred-1',10000);
+INSERT INTO users VALUES ('123-456-789','123456','456','cred-1',1000);
+INSERT INTO users VALUES ('123-456-789','123456','789','cred-1',30000);
+
+INSERT INTO users VALUES ('111-222-333','123456','111','cred-1',10000);
+INSERT INTO users VALUES ('111-222-333','123456','222','cred-1',1000);
+

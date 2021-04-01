@@ -42,29 +42,107 @@ public class ATMSSStarter extends AppKickstarter {
     public static void main(String [] args) {
         new ATMSSStarter().startApp();
 		String urlPrefix = "http://cslinux0.comp.hkbu.edu.hk/comp4107_20-21_grp06/";
-		BAMSHandler bams = new BAMSHandler(urlPrefix);
+		BAMSHandler bams = new BAMSHandler(urlPrefix,initLogger());
 
 		try{
 			testLogin(bams);
+			testGetAcc(bams);
+			//testWithdraw(bams);
+			//testDeposit(bams);
+			testEnquiry(bams);
+			testTransfer(bams);
 		}catch (Exception e){
 			System.out.println("TestBAMSHandler: Exception caught: " + e.getMessage());
 			e.printStackTrace();
 		}
+		return;
     } // main
+	static Logger initLogger() {
+		// init our logger
+		ConsoleHandler logConHdr = new ConsoleHandler();
+		logConHdr.setFormatter(new LogFormatter());
+		Logger log = Logger.getLogger("TestBAMSHandler");
+		log.setUseParentHandlers(false);
+		log.setLevel(Level.ALL);
+		log.addHandler(logConHdr);
+		logConHdr.setLevel(Level.ALL);
+		return log;
+	} // initLogger
+
+
+	static class LogFormatter extends Formatter {
+		//------------------------------------------------------------
+		// format
+		public String format(LogRecord rec) {
+			Calendar cal = Calendar.getInstance();
+			String str = "";
+
+			// get date
+			cal.setTimeInMillis(rec.getMillis());
+			str += String.format("%02d%02d%02d-%02d:%02d:%02d ",
+					cal.get(Calendar.YEAR) - 2000,
+					cal.get(Calendar.MONTH) + 1,
+					cal.get(Calendar.DAY_OF_MONTH),
+					cal.get(Calendar.HOUR_OF_DAY),
+					cal.get(Calendar.MINUTE),
+					cal.get(Calendar.SECOND));
+
+			// level of the log
+			str += "[" + rec.getLevel() + "] -- ";
+
+			// message of the log
+			str += rec.getMessage();
+			return str + "\n";
+		} // format
+	} // LogFormatter
 
 	static void testLogin(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
 		System.out.println("Login:");
 		try{
-		    String cred = bams.login("123-3456-789", "123456");
+		    String cred = bams.login("123-456-789", "123456");
 		    System.out.println("cred: " + cred);
 		}catch(Exception e){
-			System.out.println("TestBAMSHandler: Exception caught: " + e.getMessage());
+			System.out.println("TestBAMSHandler: " + e.getMessage());
 		}
 
 		System.out.println();
 	} // testLogin
 
-    //------------------------------------------------------------
+	static void testGetAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+		System.out.println("GetAcc:");
+		String accounts = bams.getAccounts("123-456-789", "cred-1");
+		System.out.println("accounts: " + accounts);
+		System.out.println();
+	}
+
+	static void testWithdraw(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+		System.out.println("Withdraw:");
+		int outAmount = bams.withdraw("123-456-789", "123","cred-1", "7000");
+		System.out.println("outAmount: " + outAmount);
+		System.out.println();
+	}
+
+	static void testDeposit(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+		System.out.println("Deposit:");
+		double depAmount = bams.deposit("123-456-789", "123","cred-1", "1703");
+		System.out.println("depAmount: " + depAmount);
+		System.out.println();
+	}
+
+	static void testEnquiry(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+		System.out.println("Enquiry:");
+		double amount = bams.enquiry("123-456-789", "123","cred-1");
+		System.out.println("amount: " + amount);
+		System.out.println();
+	} // testEnquiry
+
+	static void testTransfer(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+		System.out.println("Transfer:");
+		double transAmount = bams.transfer("123-456-789", "cred-1","123", "456", "2000");
+		System.out.println("transAmount: " + transAmount);
+		System.out.println();
+	} //testTransfer
+	//------------------------------------------------------------
     // ATMStart
     public ATMSSStarter() {
 	super("ATMSSStarter", "etc/ATM.cfg");
