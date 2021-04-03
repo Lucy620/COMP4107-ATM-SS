@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.control.TextField;
 
 
 //======================================================================
@@ -59,5 +60,8 @@ public class KeypadEmulatorController {
 	} else {
 	    log.finer(id + ": Key Pressed " + keyCodeStr);
 	}
-    } // keyPressed
+    }
+    // keyPressed
+
+
 } // KeypadEmulatorController

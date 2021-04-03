@@ -2,10 +2,12 @@ package ATMSS.KeypadHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
 import ATMSS.KeypadHandler.KeypadHandler;
+import AppKickstarter.misc.Msg;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,6 +20,7 @@ public class KeypadEmulator extends KeypadHandler {
     private ATMSSStarter atmssStarter;
     private String id;
     private Stage myStage;
+    private TextField textField;
     private KeypadEmulatorController keypadEmulatorController;
 
     //------------------------------------------------------------
@@ -50,4 +53,9 @@ public class KeypadEmulator extends KeypadHandler {
 	});
 	myStage.show();
     } // KeypadEmulator
+
+	protected void TextFieldUpdate(Msg msg){
+		//log.info(id + ": update display -- " + msg.getDetails());
+
+	}
 } // KeypadEmulator

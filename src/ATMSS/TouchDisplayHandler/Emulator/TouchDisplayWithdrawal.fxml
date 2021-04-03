@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
+    <AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.leftAnchor="0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
+        <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#WaitWithdrawal" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+        <Label layoutX="237.0" layoutY="48.0" text="Withdrawal">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+         <Label layoutX="119.0" layoutY="292.0" onMouseClicked="#WaitWithdrawal" text="\$ 400">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label layoutX="460.0" layoutY="292.0" onMouseClicked="#WaitWithdrawal" text="\$ 800">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label layoutX="114.0" layoutY="362.0" onMouseClicked="#WaitWithdrawal" text="\$ 1000">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label layoutX="455.0" layoutY="362.0" onMouseClicked="#WaitWithdrawal" text="\$ 1200">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label layoutX="126.0" layoutY="432.0" onMouseClicked="#BackToMenu" text="Back">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <Label layoutX="406.0" layoutY="432.0" onMouseClicked="#EnterAmount" text="Enter the amount">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+    </children>
+    </AnchorPane>
+</AnchorPane>

@@ -10,8 +10,8 @@
         <children>
         <AnchorPane prefHeight="171.0" prefWidth="237.0">
                <children>
-                  <Text layoutX="33.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The advice has been printed! " wrappingWidth="184.37841796875" />
-                  <Button layoutX="96.0" layoutY="107.0" mnemonicParsing="false" text="Take" />
+                  <Text layoutX="158.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The advice has been printed! " wrappingWidth="184.37841796875" />
+                  <Button layoutX="228.0" layoutY="130.0" mnemonicParsing="false" text="Take" />
                </children>
         </AnchorPane>
         </children>

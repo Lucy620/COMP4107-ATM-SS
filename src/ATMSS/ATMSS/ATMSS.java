@@ -49,6 +49,7 @@ public class ATMSS extends AppThread {
 
 		case CR_CardInserted:
 		    log.info("CardInserted: " + msg.getDetails());
+		    cardReaderInsertPressed(msg);
 		    break;
 
 		case TimesUp:
@@ -89,8 +90,33 @@ public class ATMSS extends AppThread {
 	} else if (msg.getDetails().compareToIgnoreCase("2") == 0) {
 	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
 	} else if (msg.getDetails().compareToIgnoreCase("3") == 0) {
-	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Confirmation"));
-	}
+	    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "3"));
+	}else if (msg.getDetails().compareToIgnoreCase("4") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "4"));
+		}else if (msg.getDetails().compareToIgnoreCase("5") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "5"));
+		}else if (msg.getDetails().compareToIgnoreCase("6") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "6"));
+		}else if (msg.getDetails().compareToIgnoreCase("7") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "7"));
+		}else if (msg.getDetails().compareToIgnoreCase("8") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "8"));
+		}else if (msg.getDetails().compareToIgnoreCase("9") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "9"));
+		}else if (msg.getDetails().compareToIgnoreCase("0") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "0"));
+		}else if (msg.getDetails().compareToIgnoreCase("00") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "00"));
+		}else if (msg.getDetails().compareToIgnoreCase(".") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "."));
+		}else if (msg.getDetails().compareToIgnoreCase("Enter") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Enter"));
+		}else if (msg.getDetails().compareToIgnoreCase("Clear") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Clear"));
+		}else if (msg.getDetails().compareToIgnoreCase("???") == 0) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "???"));
+		}
+
     } // processKeyPressed
 
 
@@ -99,4 +125,8 @@ public class ATMSS extends AppThread {
     private void processMouseClicked(Msg msg) {
 	// *** process mouse click here!!! ***
     } // processMouseClicked
+
+	private void cardReaderInsertPressed(Msg msg){
+    	touchDisplayMBox.send(new Msg(id,mbox,Msg.Type.TD_UpdateDisplay,"PasswordConfirm"));
+	}
 } // CardReaderHandler

@@ -3,8 +3,12 @@ package ATMSS.TouchDisplayHandler.Emulator;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.MBox;
 import AppKickstarter.misc.Msg;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
+import java.util.Set;
 import java.util.logging.Logger;
 
 
@@ -16,6 +20,8 @@ public class TouchDisplayEmulatorController {
     private Logger log;
     private TouchDisplayEmulator touchDisplayEmulator;
     private MBox touchDisplayMBox;
+    public TextField WithdrawalTextField;
+    public TextField textField;
 
 
     //------------------------------------------------------------
@@ -28,14 +34,76 @@ public class TouchDisplayEmulatorController {
 	this.touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
     } // initialize
 
+    public void AppendTextField(String status){
+        WithdrawalTextField.appendText(status);
+    }
+
 
     //------------------------------------------------------------
     // td_mouseClick
     public void td_mouseClick(MouseEvent mouseEvent) {
         int x = (int) mouseEvent.getX();
-	int y = (int) mouseEvent.getY();
+        int y = (int) mouseEvent.getY();
 
-	log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
-	touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
-    } // td_mouseClick
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        if (x >= 340 && y >= 270 && y <= 340) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Withdrawal"));
+        }
+    }// td_mouseClick
+
+    public void td_mouseClick2(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        Label selectedLabel = ((Label) mouseEvent.getSource());
+        String selectedText = selectedLabel.getText();
+        //System.out.println(selectedText);
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
+    }
+
+    public void WaitWithdrawal(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        if(x <= 300 && y >= 410 ){
+            BackToMenu(mouseEvent);
+        }else if(x >= 340 && y >= 410){
+            EnterAmount(mouseEvent);
+        }else{
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
+        }
+
+    }
+
+    public void BackToMenu(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+    }
+
+    public void EnterAmount(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WithdrawalEnterAmount"));
+    }
 } // TouchDisplayEmulatorController

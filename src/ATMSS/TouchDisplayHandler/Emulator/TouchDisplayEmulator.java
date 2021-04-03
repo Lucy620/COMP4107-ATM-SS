@@ -20,6 +20,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
     private final int HEIGHT = 520;
     private ATMSSStarter atmssStarter;
     private String id;
+    private String text = "";
     private Stage myStage;
     private TouchDisplayEmulatorController touchDisplayEmulatorController;
 
@@ -62,18 +63,36 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 
 	switch (msg.getDetails()) {
 	    case "BlankScreen":
-		reloadStage("TouchDisplayEmulator.fxml");
-		break;
+			reloadStage("TouchDisplayEmulator.fxml");
+			break;
 
 	    case "MainMenu":
-		reloadStage("TouchDisplayMainMenu.fxml");
-		break;
+			reloadStage("TouchDisplayMainMenu.fxml");
+			break;
 
 	    case "Confirmation":
-		reloadStage("TouchDisplayConfirmation.fxml");
-		break;
+			reloadStage("TouchDisplayConfirmation.fxml");
+			break;
+
+		case "Withdrawal":
+			reloadStage("TouchDisplayWithdrawal.fxml");
+			break;
+
+		case "WaitWithdrawal":
+			reloadStage("TouchDisplayWaitWithdrawal.fxml");
+			break;
+
+		case "WithdrawalEnterAmount":
+			reloadStage("TouchDisplayWithdrawalEnterAmount.fxml");
+			break;
+
+		case "PasswordConfirm":
+			reloadStage("TouchDisplayConfirmPin.fxml");
+			break;
 
 	    default:
+	    	touchDisplayEmulatorController.AppendTextField(text+msg.getDetails());
+			//touchDisplayEmulatorController.AppendTextField2(text+msg.getDetails());
 		log.severe(id + ": update display with unknown display type -- " + msg.getDetails());
 		break;
 	}
