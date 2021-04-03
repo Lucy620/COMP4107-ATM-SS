@@ -2,6 +2,7 @@ package ATMSS.CardReaderHandler.Emulator;
 
 import ATMSS.ATMSSStarter;
 import ATMSS.CardReaderHandler.CardReaderHandler;
+import ATMSS.ATMSSEmulatorStarter;
 
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ public class CardReaderEmulator extends CardReaderHandler {
     private String id;
     private Stage myStage;
     private CardReaderEmulatorController cardReaderEmulatorController;
+    private ATMSSEmulatorStarter atmssEmulatorStarter;
 
     //------------------------------------------------------------
     // CardReaderEmulator
@@ -27,7 +29,6 @@ public class CardReaderEmulator extends CardReaderHandler {
 	this.atmssStarter = atmssStarter;
 	this.id = id;
     } // CardReaderEmulator
-
 
     //------------------------------------------------------------
     // start
@@ -59,6 +60,7 @@ public class CardReaderEmulator extends CardReaderHandler {
 	super.handleCardInsert();
 	cardReaderEmulatorController.appendTextArea("Card Inserted");
 	cardReaderEmulatorController.updateCardStatus("Card Inserted");
+
     } // handleCardInsert
 
 
@@ -69,6 +71,7 @@ public class CardReaderEmulator extends CardReaderHandler {
 	super.handleCardEject();
 	cardReaderEmulatorController.appendTextArea("Card Ejected");
 	cardReaderEmulatorController.updateCardStatus("Card Ejected");
+
     } // handleCardEject
 
 

@@ -4,6 +4,7 @@ import ATMSS.HWHandler.HWHandler;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 
+import ATMSS.ATMSSEmulatorStarter;
 
 //======================================================================
 // CardReaderHandler

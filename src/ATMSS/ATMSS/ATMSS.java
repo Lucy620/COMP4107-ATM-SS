@@ -118,7 +118,6 @@ public class ATMSS extends AppThread {
 
     } // processKeyPressed
 
-
     //------------------------------------------------------------
     // processMouseClicked
     private void processMouseClicked(Msg msg) {
