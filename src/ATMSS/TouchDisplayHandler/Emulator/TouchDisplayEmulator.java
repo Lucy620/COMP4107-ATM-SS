@@ -86,8 +86,35 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			reloadStage("TouchDisplayWithdrawalEnterAmount.fxml");
 			break;
 
+		case "Deposit":
+			reloadStage("TouchDisplayDeposit.fxml");
+			break;
+
 		case "PasswordConfirm":
 			reloadStage("TouchDisplayConfirmPin.fxml");
+			break;
+
+		case "Clear":
+			touchDisplayEmulatorController.ClearTextField();
+			break;
+
+		case "00":
+			touchDisplayEmulatorController.AppendTextField00(text+msg.getDetails());
+			break;
+
+		case "Enter":
+			touchDisplayEmulatorController.EnterNumber(text);
+			break;
+
+		case "EnterDeposit":
+			reloadStage("TouchDisplayWaitDeposit.fxml");
+			break;
+
+		case "EnterWithdrawal":
+			reloadStage("TouchDisplayWaitWithdrawal.fxml");
+			break;
+
+		case "EnterPin":
 			break;
 
 	    default:

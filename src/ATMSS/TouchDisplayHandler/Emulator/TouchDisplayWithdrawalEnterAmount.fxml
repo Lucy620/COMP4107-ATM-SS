@@ -10,15 +10,14 @@
         <AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
             <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" />
             
-            <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#td_mouseClick" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
-            <Label layoutX="126.0" layoutY="432.0" text="Back">
+            <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#Withdrawal" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+            <Label layoutX="126.0" layoutY="432.0" onMouseClicked="#Withdrawal" text="Back">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="WithdrawalTextField" layoutX="241.0" layoutY="228.0" />
+            <TextField fx:id="WithdrawalTextField" style="EnterWithdrawal" layoutX="241.0" layoutY="228.0" />
             <Label layoutX="52.0" layoutY="148.0" text="Please Enter Amount:">
                <font>
                   <Font size="30.0" />

@@ -20,6 +20,8 @@ public class TouchDisplayEmulatorController {
     private Logger log;
     private TouchDisplayEmulator touchDisplayEmulator;
     private MBox touchDisplayMBox;
+    int KeyPressedCount = 0;
+    String enternumber;
     public TextField WithdrawalTextField;
     public TextField textField;
 
@@ -36,8 +38,34 @@ public class TouchDisplayEmulatorController {
 
     public void AppendTextField(String status){
         WithdrawalTextField.appendText(status);
+        KeyPressedCount++;
     }
 
+    public void AppendTextField00(String status){
+        WithdrawalTextField.appendText(status);
+        KeyPressedCount += 2;
+    }
+
+    public void ClearTextField(){
+        WithdrawalTextField.deleteText(0,KeyPressedCount);
+        KeyPressedCount = 0;
+    }
+
+    public void EnterNumber(String text){
+        switch (WithdrawalTextField.getStyle()){
+            case "Pin":
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "EnterPin"));
+                break;
+
+            case "EnterDeposit":
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "EnterDeposit"));
+                break;
+
+            case "EnterWithdrawal":
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"EnterWithdrawal"));
+        }
+        //System.out.println(WithdrawalTextField.getText());
+    }
 
     //------------------------------------------------------------
     // td_mouseClick
@@ -51,6 +79,8 @@ public class TouchDisplayEmulatorController {
 
         if (x >= 340 && y >= 270 && y <= 340) {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Withdrawal"));
+        }else if(x <= 300 && y >= 270 && y <= 340){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Deposit"));
         }
     }// td_mouseClick
 
@@ -68,11 +98,24 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
     }
 
+    public void Withdrawal(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Withdrawal"));
+    }
+
     public void WaitWithdrawal(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
 
         log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 

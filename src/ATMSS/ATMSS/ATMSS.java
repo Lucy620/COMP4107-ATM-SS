@@ -109,12 +109,12 @@ public class ATMSS extends AppThread {
 			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "00"));
 		}else if (msg.getDetails().compareToIgnoreCase(".") == 0) {
 			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "."));
-		}else if (msg.getDetails().compareToIgnoreCase("Enter") == 0) {
-			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Enter"));
-		}else if (msg.getDetails().compareToIgnoreCase("Clear") == 0) {
+		}else if (msg.getDetails().startsWith("Enter")) {
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, msg.getDetails()));
+		}else if (msg.getDetails().compareToIgnoreCase("Erase") == 0) {
 			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Clear"));
 		}else if (msg.getDetails().compareToIgnoreCase("???") == 0) {
-			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "???"));
+
 		}
 
     } // processKeyPressed
