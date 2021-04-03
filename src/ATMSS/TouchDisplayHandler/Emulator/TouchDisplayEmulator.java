@@ -74,7 +74,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			if (AccountCount == 0) {
 				touchDisplayEmulatorController.TransferField1(account);
 				AccountCount++;
-			} else if(AccountCount == 1){
+			} else if (AccountCount == 1) {
 				if (account.equals(touchDisplayEmulatorController.getAccount1())) {
 					touchDisplayEmulatorController.TransferField1(account);
 				} else {
@@ -84,7 +84,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			}
 
 			System.out.println(touchDisplayEmulatorController.getAccount1());
-		} else{
+		} else {
 
 			switch (msg.getDetails()) {
 				case "BlankScreen":
@@ -128,13 +128,13 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					reloadStage("TouchDisplayConfirmPin.fxml");
 					break;
 
-		case "Account 1":
-			reloadStage("ViewBalance.fxml");
-			break;
+				case "Account 1":
+					reloadStage("ViewBalance.fxml");
+					break;
 
-		case "View Balance":
-			reloadStage("SelectAccount.fxml");
-			break;
+				case "View Balance":
+					reloadStage("SelectAccount.fxml");
+					break;
 
 				case "Clear":
 					touchDisplayEmulatorController.ClearTextField();
@@ -159,14 +159,18 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 				case "EnterPin":
 					break;
 
+				case "TD_AfterDispensing":
+					reloadStage("AfterDispensing.fxml");
+					break;
+
 				default:
 					touchDisplayEmulatorController.AppendTextField(text + msg.getDetails());
-
+					//touchDisplayEmulatorController.AppendTextField2(text+msg.getDetails());
 					log.severe(id + ": update display with unknown display type -- " + msg.getDetails());
 					break;
 			}
+		} // handleUpdateDisplay
 	}
-    } // handleUpdateDisplay
 
 
     //------------------------------------------------------------
