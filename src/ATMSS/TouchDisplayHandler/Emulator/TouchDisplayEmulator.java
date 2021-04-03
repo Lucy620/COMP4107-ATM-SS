@@ -94,8 +94,12 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			reloadStage("TouchDisplayConfirmPin.fxml");
 			break;
 
-		case "View Balance":
+		case "Account 1":
 			reloadStage("ViewBalance.fxml");
+			break;
+
+		case "View Balance":
+			reloadStage("SelectAccount.fxml");
 			break;
 
 		case "Clear":

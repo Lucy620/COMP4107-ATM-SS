@@ -150,6 +150,24 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WithdrawalEnterAmount"));
     }
+    public void PickAction(MouseEvent mouseEvent) {
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        if (x <= 300 && y >= 270 && y <= 340) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
+        }else if(x >= 340 && y >= 270 && y <= 340){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        }else if(x <= 300 && y >= 340 && y <= 410){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+        }
+    }// SelectAccount_rectangle
+
 
     public void EjectCard(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
@@ -172,6 +190,37 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
+    }
+    public void select_mouseClick(MouseEvent mouseEvent) {
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        if (x <= 300 && y >= 270 && y <= 340) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Account 1"));
+        }else if(x >= 340 && y >= 270 && y <= 340){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Account 1"));
+        }else if(x <= 300 && y >= 340 && y <= 410){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Account 1"));
+        }else if(x >= 340 && y >= 340 && y <= 410){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Account 1"));
+        }
+    }// SelectAccount_rectangle
+
+    public void ViewBalance(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Account 1"));
+
     }
 
 

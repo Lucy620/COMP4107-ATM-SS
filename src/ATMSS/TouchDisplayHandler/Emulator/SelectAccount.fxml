@@ -13,29 +13,29 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
-            <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" onMouseClicked="#PickAction" height="480.0" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
-            <Label layoutX="100.0" layoutY="60.0" text="Account Balance: ">
+            <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" onMouseClicked="#select_mouseClick" height="480.0" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+            <Label layoutX="150.0" layoutY="60.0" text="Select Account ">
                 <font>
-                    <Font size="24.0" />
+                    <Font size="36.0" />
                 </font>
             </Label>
-            <Label layoutX="15.0" layoutY="292.0"  text="Eject card and print advice" onMouseClicked="#EjectCardandAdvice">
+            <Label layoutX="119.0" layoutY="292.0"  text="Account 1" onMouseClicked="#ViewBalance">
 
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="400.0" layoutY="292.0" onMouseClicked="#EjectCard" text="Eject card only">
+            <Label layoutX="460.0" layoutY="292.0" onMouseClicked="#ViewBalance" text="Account 2" >
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="114.0" layoutY="362.0" onMouseClicked="#BackToMenu" text="Back">
+            <Label layoutX="114.0" layoutY="362.0" onMouseClicked="#ViewBalance" text="Account 3" >
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="455.0" layoutY="362.0" text="">
+            <Label layoutX="455.0" layoutY="362.0" text="Account 4" onMouseClicked="#ViewBalance">
                 <font>
                     <Font size="24.0" />
                 </font>
