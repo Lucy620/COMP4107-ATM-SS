@@ -16,12 +16,18 @@ public class AdvicePrinterHandler extends HWHandler{
     // processMsg
     protected void processMsg(Msg msg) {
         switch (msg.getType()) {
-            case KP_KeyPressed:
-                atmss.send(new Msg(id, mbox, Msg.Type.KP_KeyPressed, msg.getDetails()));
+            case CR_EjectCard:
+                handleUpdateDisplay(msg);
                 break;
 
             default:
                 log.warning(id + ": unknown message type: [" + msg + "]");
         }
     } // processMsg
+
+    protected void handleUpdateDisplay(Msg msg) {
+        log.info(id + ": update display -- " + msg.getDetails());
+    } // handleUpdateDisplay
+
+
 }

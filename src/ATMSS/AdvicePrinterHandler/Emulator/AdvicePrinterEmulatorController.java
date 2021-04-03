@@ -32,8 +32,6 @@ public class AdvicePrinterEmulatorController {
     //------------------------------------------------------------
     // buttonPressed
     public void buttonPressed(ActionEvent actionEvent) {
-        Button btn = (Button) actionEvent.getSource();
-        String btnTxt = "Advice is taken.";
-        advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.KP_KeyPressed, btnTxt));
+        advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.CR_EjectCard, "Waiting"));
     } // buttonPressed
 }

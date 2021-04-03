@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="350" prefWidth="470" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.AdvicePrinterHandler.Emulator.AdvicePrinterEmulatorController">
    <children>
-      <Text layoutX="100" layoutY="200" strokeType="OUTSIDE" strokeWidth="0.0" text="Closed!!!" wrappingWidth="152.22900390625">
+      <Text layoutX="100" layoutY="200" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting..." wrappingWidth="152.22900390625">
          <font>
             <Font size="36.0" />
          </font>

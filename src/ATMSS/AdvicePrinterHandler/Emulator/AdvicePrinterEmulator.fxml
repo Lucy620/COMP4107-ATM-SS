@@ -19,7 +19,7 @@
             </font>
         </Text>
 
-        <Button layoutX="150.0" layoutY="250.0" mnemonicParsing="false" text="Take" />
+        <Button layoutX="150.0" layoutY="250.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" onAction="#buttonPressed" text="Take" />
     </children>
 
 </AnchorPane>

@@ -94,6 +94,10 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			reloadStage("TouchDisplayConfirmPin.fxml");
 			break;
 
+		case "View Balance":
+			reloadStage("ViewBalance.fxml");
+			break;
+
 		case "Clear":
 			touchDisplayEmulatorController.ClearTextField();
 			break;

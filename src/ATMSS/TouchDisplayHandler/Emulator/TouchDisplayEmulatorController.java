@@ -81,6 +81,8 @@ public class TouchDisplayEmulatorController {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Withdrawal"));
         }else if(x <= 300 && y >= 270 && y <= 340){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Deposit"));
+        }else if(x >= 340 && y>=340 && y<=410){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "View Balance"));
         }
     }// td_mouseClick
 
@@ -117,7 +119,6 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
         if(x <= 300 && y >= 410 ){
             BackToMenu(mouseEvent);
@@ -149,4 +150,30 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WithdrawalEnterAmount"));
     }
+
+    public void EjectCard(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+    }
+
+    public void EjectCardandAdvice(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCardandAdvice"));
+    }
+
+
+
 } // TouchDisplayEmulatorController

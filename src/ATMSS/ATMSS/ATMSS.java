@@ -12,6 +12,7 @@ public class ATMSS extends AppThread {
     private MBox cardReaderMBox;
     private MBox keypadMBox;
     private MBox touchDisplayMBox;
+    private MBox advicePrinterMBox;
 
     //------------------------------------------------------------
     // ATMSS
@@ -30,6 +31,7 @@ public class ATMSS extends AppThread {
 	cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
 	keypadMBox = appKickstarter.getThread("KeypadHandler").getMBox();
 	touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
+	advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
 
 	for (boolean quit = false; !quit;) {
 	    Msg msg = mbox.receive();
@@ -45,11 +47,6 @@ public class ATMSS extends AppThread {
 		case KP_KeyPressed:
 		    log.info("KeyPressed: " + msg.getDetails());
 		    processKeyPressed(msg);
-		    break;
-
-		case CR_CardInserted:
-		    log.info("CardInserted: " + msg.getDetails());
-		    cardReaderInsertPressed(msg);
 		    break;
 
 		case TimesUp:
@@ -123,7 +120,13 @@ public class ATMSS extends AppThread {
     //------------------------------------------------------------
     // processMouseClicked
     private void processMouseClicked(Msg msg) {
-	// *** process mouse click here!!! ***
+		if (msg.getDetails().compareToIgnoreCase("EjectCard") == 0) {
+			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+		}else if(msg.getDetails().compareToIgnoreCase("EjectCardandAdvice") == 0){
+			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+			advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
+		}
+
     } // processMouseClicked
 
 	private void cardReaderInsertPressed(Msg msg){
