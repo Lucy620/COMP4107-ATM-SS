@@ -16,6 +16,8 @@ import javafx.stage.WindowEvent;
 //======================================================================
 // CardDispenserEmulator
 public class CashDispenserEmulator extends CashDispenserHandler {
+    private final int WIDTH = 350;
+    private final int HEIGHT = 470;
     private ATMSSStarter atmssStarter;
     private String id;
     private Stage myStage;
@@ -42,7 +44,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
         cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
         cashDispenserEmulatorController.initialize(id, atmssStarter, log, this);
         myStage.initStyle(StageStyle.DECORATED);
-        myStage.setScene(new Scene(root, 500, 170));
+        myStage.setScene(new Scene(root, WIDTH, HEIGHT));
         myStage.setTitle("Card Dispenser");
         myStage.setResizable(false);
         myStage.setOnCloseRequest((WindowEvent event) -> {
@@ -89,7 +91,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
                     root = loader.load();
                     cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
                     cashDispenserEmulatorController.initialize(id, atmssStarter, log, cashDispenserEmulator);
-                    myStage.setScene(new Scene(root, 500, 170));
+                    myStage.setScene(new Scene(root, WIDTH, HEIGHT));
                 } catch (Exception e) {
                     log.severe(id + ": failed to load " + fxmlFName);
                     e.printStackTrace();

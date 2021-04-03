@@ -25,7 +25,7 @@ public class TouchDisplayHandler extends HWHandler {
 
             case TD_UpdateDisplay:
                 handleUpdateDisplay(msg);
-                atmss.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
+                //atmss.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
                 break;
 
             default:

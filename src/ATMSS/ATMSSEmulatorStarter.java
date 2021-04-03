@@ -31,6 +31,11 @@ public class ATMSSEmulatorStarter extends ATMSSStarter {
 
     //------------------------------------------------------------
     // startHandlers
+
+	public void reload(){
+    	new ATMSSEmulatorStarter().startApp();
+	}
+
     @Override
     protected void startHandlers() {
         Emulators.atmssEmulatorStarter = this;
