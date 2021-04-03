@@ -9,19 +9,67 @@
     <AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
         <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="72.0" onMouseClicked="#ViewBalance" layoutX="339.0" layoutY="409.0" stroke="BLACK" strokeType="OUTSIDE" width="302.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#CashCollectorOpen" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
 
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#BackToMenu" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
-            <Label layoutX="115.0" layoutY="148.0" text="Please Enter Amount:">
+            <Label layoutX="96.0" layoutY="14.0" text="You have deposited the following amount:">
                 <font>
-                    <Font size="30.0" />
+                    <Font size="24.0" />
                 </font>
             </Label>
-            <TextField fx:id="WithdrawalTextField" style="EnterDeposit" layoutX="241.0" layoutY="228.0" />
-         <Label layoutX="126.0" layoutY="432.0" onMouseClicked="#BackToMenu" text="Back">
-            <font>
-               <Font size="24.0" />
-            </font>
-         </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16b52b" height="107.0" layoutY="62.0" stroke="BLACK" strokeType="INSIDE" width="642.0" />
+            <Label layoutX="119.0" layoutY="79.0" text="Deposit account number:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="138.0" layoutY="124.0" text="Deposit account name:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="191.0" layoutY="180.0" text="The number of banknotes deposited:">
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Label>
+            <Label layoutX="165.0" layoutY="213.0" text="100 HKD     X     100num = 100amount">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="165.0" layoutY="250.0" text="500 HKD     X     500num = 500amount">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="148.0" layoutY="288.0" text="1000 HKD      X     1000num = 1000amount">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="302.0" layoutY="329.0" text="Total amount: totalAmount">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="271.0" layoutY="367.0" text="Please select">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+
+
+            <Label layoutX="61.0" layoutY="428.0" onMouseClicked="#CashCollectorOpenLabel" text="Reentry banknotes">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Label>
+            <Label layoutX="451.0" layoutY="428.0" onMouseClicked="#ViewBalance" text="Confirm">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Label>
         </children>
     </AnchorPane>
 </AnchorPane>
