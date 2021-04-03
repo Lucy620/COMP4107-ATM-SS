@@ -127,7 +127,8 @@ public class TouchDisplayEmulatorController {
         }else{
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
         }
-
+        System.out.println("123");
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
     }
 
     public void BackToMenu(MouseEvent mouseEvent){

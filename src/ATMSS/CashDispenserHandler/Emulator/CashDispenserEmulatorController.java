@@ -33,9 +33,6 @@ public class CashDispenserEmulatorController {
     //------------------------------------------------------------
     // buttonPressed
     public void buttonPressed(ActionEvent actionEvent) {
-        Button btn = (Button) actionEvent.getSource();
-        String btnTxt = "Waiting";
-        System.out.println(btnTxt);
-        cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.TD_UpdateDisplay, btnTxt));
+        cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.TD_UpdateDisplay, "Waiting"));
     }
 } // CardDispenserEmulatorController

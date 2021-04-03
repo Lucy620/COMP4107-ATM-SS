@@ -13,6 +13,7 @@ public class ATMSS extends AppThread {
     private MBox keypadMBox;
     private MBox touchDisplayMBox;
     private MBox advicePrinterMBox;
+    private MBox cashDispenserMBox;
 
     //------------------------------------------------------------
     // ATMSS
@@ -32,6 +33,7 @@ public class ATMSS extends AppThread {
 	keypadMBox = appKickstarter.getThread("KeypadHandler").getMBox();
 	touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
 	advicePrinterMBox = appKickstarter.getThread("AdvicePrinterHandler").getMBox();
+	cashDispenserMBox = appKickstarter.getThread("CashDispenserHandler").getMBox();
 
 	for (boolean quit = false; !quit;) {
 	    Msg msg = mbox.receive();
@@ -125,6 +127,8 @@ public class ATMSS extends AppThread {
 		}else if(msg.getDetails().compareToIgnoreCase("PrintAdvice") == 0){
 			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
 			advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
+		}else if(msg.getDetails().compareToIgnoreCase("dispensing") == 0){
+			cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Dispensing"));
 		}
 
     } // processMouseClicked
