@@ -118,6 +118,7 @@ public class ATMSS extends AppThread {
 
     } // processKeyPressed
 
+
     //------------------------------------------------------------
     // processMouseClicked
     private void processMouseClicked(Msg msg) {
@@ -126,8 +127,10 @@ public class ATMSS extends AppThread {
 		}else if(msg.getDetails().compareToIgnoreCase("PrintAdvice") == 0){
 			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
 			advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
-		}else if(msg.getDetails().compareToIgnoreCase("dispensing") == 0){
+		}else if(msg.getDetails().compareToIgnoreCase("Dispensing") == 0){
 			cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Dispensing"));
+		}else if(msg.getDetails().compareToIgnoreCase("TD_AfterDispensing") == 0){
+			touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TD_AfterDispensing"));
 		}
 
     } // processMouseClicked

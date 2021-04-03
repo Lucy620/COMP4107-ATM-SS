@@ -8,9 +8,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
@@ -25,8 +23,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
     private String text = "";
     private Stage myStage;
     private TouchDisplayEmulatorController touchDisplayEmulatorController;
-    public TextField account1;
-	public int AccountCount = 0;
+
     //------------------------------------------------------------
     // TouchDisplayEmulator
     public TouchDisplayEmulator(String id, ATMSSStarter atmssStarter) throws Exception {
@@ -62,109 +59,77 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
     //------------------------------------------------------------
     // handleUpdateDisplay
     protected void handleUpdateDisplay(Msg msg) {
-		log.info(id + ": update display -- " + msg.getDetails());
+	log.info(id + ": update display -- " + msg.getDetails());
 
-		if (msg.getDetails().startsWith("account")) {
-			String str = msg.getDetails();
-			String account = "";
-			for (int k = 7; k < str.length(); k++) {
-				account += str.charAt(k);
-			}
+	switch (msg.getDetails()) {
+	    case "BlankScreen":
+			reloadStage("TouchDisplayEmulator.fxml");
+			break;
 
-			if (AccountCount == 0) {
-				touchDisplayEmulatorController.TransferField1(account);
-				AccountCount++;
-			} else if(AccountCount == 1){
-				if (account.equals(touchDisplayEmulatorController.getAccount1())) {
-					touchDisplayEmulatorController.TransferField1(account);
-				} else {
-					touchDisplayEmulatorController.TransferField2(account);
-					AccountCount++;
-				}
-			}
+	    case "MainMenu":
+			reloadStage("TouchDisplayMainMenu.fxml");
+			break;
 
-			System.out.println(touchDisplayEmulatorController.getAccount1());
-		} else{
+	    case "Confirmation":
+			reloadStage("TouchDisplayConfirmation.fxml");
+			break;
 
-			switch (msg.getDetails()) {
-				case "BlankScreen":
-					reloadStage("TouchDisplayEmulator.fxml");
-					break;
+		case "Withdrawal":
+			reloadStage("TouchDisplayWithdrawal.fxml");
+			break;
 
-				case "MainMenu":
-					reloadStage("TouchDisplayMainMenu.fxml");
-					break;
+		case "WaitWithdrawal":
+			reloadStage("TouchDisplayWaitWithdrawal.fxml");
+			break;
 
-				case "Confirmation":
-					reloadStage("TouchDisplayConfirmation.fxml");
-					break;
+		case "WithdrawalEnterAmount":
+			reloadStage("TouchDisplayWithdrawalEnterAmount.fxml");
+			break;
 
-				case "Withdrawal":
-					reloadStage("TouchDisplayWithdrawal.fxml");
-					break;
+		case "Deposit":
+			reloadStage("TouchDisplayDeposit.fxml");
+			break;
 
-				case "WaitWithdrawal":
-					reloadStage("TouchDisplayWaitWithdrawal.fxml");
-					break;
-
-				case "WithdrawalEnterAmount":
-					reloadStage("TouchDisplayWithdrawalEnterAmount.fxml");
-					break;
-
-				case "Deposit":
-					reloadStage("TouchDisplayDeposit.fxml");
-					break;
-
-				case "Transfer":
-					reloadStage("TouchDisplayTransfer.fxml");
-					break;
-
-				case "WaitTransfer":
-					AccountCount = 0;
-					reloadStage("TouchDisplayWaitTransfer.fxml");
-					break;
-
-				case "PasswordConfirm":
-					reloadStage("TouchDisplayConfirmPin.fxml");
-					break;
-
-		case "Account 1":
-			reloadStage("ViewBalance.fxml");
+		case "PasswordConfirm":
+			reloadStage("TouchDisplayConfirmPin.fxml");
 			break;
 
 		case "View Balance":
-			reloadStage("SelectAccount.fxml");
+			reloadStage("ViewBalance.fxml");
 			break;
 
-				case "Clear":
-					touchDisplayEmulatorController.ClearTextField();
-					break;
+		case "Clear":
+			touchDisplayEmulatorController.ClearTextField();
+			break;
 
-				case "00":
-					touchDisplayEmulatorController.AppendTextField00(text + msg.getDetails());
-					break;
+		case "00":
+			touchDisplayEmulatorController.AppendTextField00(text+msg.getDetails());
+			break;
 
-				case "Enter":
-					touchDisplayEmulatorController.EnterNumber(text);
-					break;
+		case "Enter":
+			touchDisplayEmulatorController.EnterNumber(text);
+			break;
 
-				case "EnterDeposit":
-					reloadStage("TouchDisplayWaitDeposit.fxml");
-					break;
+		case "EnterDeposit":
+			reloadStage("TouchDisplayWaitDeposit.fxml");
+			break;
 
-				case "EnterWithdrawal":
-					reloadStage("TouchDisplayWaitWithdrawal.fxml");
-					break;
+		case "EnterWithdrawal":
+			reloadStage("TouchDisplayWaitWithdrawal.fxml");
+			break;
 
-				case "EnterPin":
-					break;
+		case "EnterPin":
+			break;
 
-				default:
-					touchDisplayEmulatorController.AppendTextField(text + msg.getDetails());
+		case "TD_AfterDispensing":
+			reloadStage("AfterDispensing.fxml");
+			break;
 
-					log.severe(id + ": update display with unknown display type -- " + msg.getDetails());
-					break;
-			}
+		default:
+	    	touchDisplayEmulatorController.AppendTextField(text+msg.getDetails());
+			//touchDisplayEmulatorController.AppendTextField2(text+msg.getDetails());
+		log.severe(id + ": update display with unknown display type -- " + msg.getDetails());
+		break;
 	}
     } // handleUpdateDisplay
 
