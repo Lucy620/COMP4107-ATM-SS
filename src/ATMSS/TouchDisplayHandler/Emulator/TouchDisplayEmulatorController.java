@@ -202,6 +202,7 @@ public class TouchDisplayEmulatorController {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
         }
 
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
     }
 
     public void BackToMenu(MouseEvent mouseEvent){
@@ -224,4 +225,30 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WithdrawalEnterAmount"));
     }
+
+    public void EjectCard(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+    }
+
+    public void EjectCardandAdvice(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
+    }
+
+
+
 } // TouchDisplayEmulatorController

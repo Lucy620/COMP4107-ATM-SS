@@ -19,6 +19,10 @@ public class CashDispenserHandler extends HWHandler {
     protected void processMsg(Msg msg) {
         switch (msg.getType()) {
 
+            case TD_MouseClicked:
+                atmss.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
+                break;
+
             case TD_UpdateDisplay:
                 handleUpdateDisplay(msg);
                 break;
