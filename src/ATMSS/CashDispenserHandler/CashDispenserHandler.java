@@ -22,11 +22,20 @@ public class CashDispenserHandler extends HWHandler {
                 atmss.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
                 break;
 
+            case TD_UpdateDisplay:
+                handleUpdateDisplay(msg);
+                break;
+
             default:
                 log.warning(id + ": unknown message type: [" + msg + "]");
         }
     } // processMsg
 
+    //------------------------------------------------------------
+    // handleUpdateDisplay
+    protected void handleUpdateDisplay(Msg msg) {
+        log.info(id + ": update display -- " + msg.getDetails());
+    } // handleUpdateDisplay
 
     //------------------------------------------------------------
     // handleCashDispense

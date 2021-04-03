@@ -8,12 +8,11 @@
 	<children>
 		<AnchorPane prefHeight="100.0" prefWidth="640.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
 			<children>
-				<Label layoutX="82.0" layoutY="14.0" text="Please take the cash.">
+				<Label layoutX="163.0" layoutY="30.0" text="Waiting...">
 					<font>
 						<Font size="30.0" />
 					</font>
 				</Label>
-				<Button layoutX="180.0" layoutY="71.0" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="50.0" prefWidth="100.0" text="Take" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="71.0"><font><Font size="20.0" /></font></Button>
 			</children>
 		</AnchorPane>
 	</children>

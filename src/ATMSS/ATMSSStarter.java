@@ -174,7 +174,7 @@ public class ATMSSStarter extends AppKickstarter {
 	    touchDisplayHandler = new TouchDisplayHandler("TouchDisplayHandler", this);
 	    advicePrinterHandler = new AdvicePrinterHandler("AdvicePrinterHandler",this);
 	    cashCollectorHandler = new CashCollectorHandler("CashCollectorHandler",this);
-		cashDispenserHandler = new CashDispenserHandler("TouchDisplayHandler", this);
+		cashDispenserHandler = new CashDispenserHandler("CashDispenserHandler", this);
 	} catch (Exception e) {
 	    System.out.println("AppKickstarter: startApp failed");
 	    e.printStackTrace();

@@ -1,12 +1,128 @@
-210402-20:54:44 [INFO] -- 
-210402-20:54:44 [INFO] -- 
-210402-20:54:44 [INFO] -- ============================================================
-210402-20:54:44 [INFO] -- ATMSSStarter: Application Starting...
-210402-20:54:44 [INFO] -- timer: starting...
-210402-20:54:44 [INFO] -- AdvicePrinterHandler: starting...
-210402-20:54:44 [INFO] -- TouchDisplayHandler: starting...
-210402-20:54:44 [INFO] -- KeypadHandler: starting...
-210402-20:54:44 [INFO] -- CardReaderHandler: starting...
-210402-20:54:44 [INFO] -- TouchDisplayHandler: starting...
-210402-20:54:44 [INFO] -- CashCollectorHandler: starting...
-210402-20:54:44 [INFO] -- ATMSS: starting...
+210403-14:11:18 [INFO] -- 
+210403-14:11:18 [INFO] -- 
+210403-14:11:18 [INFO] -- ============================================================
+210403-14:11:18 [INFO] -- ATMSSStarter: Application Starting...
+210403-14:11:18 [INFO] -- timer: starting...
+210403-14:11:18 [INFO] -- TouchDisplayHandler: starting...
+210403-14:11:18 [INFO] -- CashCollectorHandler: starting...
+210403-14:11:18 [INFO] -- KeypadHandler: starting...
+210403-14:11:18 [INFO] -- CardReaderHandler: starting...
+210403-14:11:18 [INFO] -- AdvicePrinterHandler: starting...
+210403-14:11:18 [INFO] -- TouchDisplayHandler: starting...
+210403-14:11:18 [INFO] -- ATMSS: starting...
+210403-14:12:18 [INFO] -- Poll: TimesUp 80982 0
+210403-14:12:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:12:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:12:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:13:18 [INFO] -- Poll: TimesUp 18467 0
+210403-14:13:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:13:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:13:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:14:18 [INFO] -- Poll: TimesUp 12282 0
+210403-14:14:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:14:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:14:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:15:18 [INFO] -- Poll: TimesUp 24884 0
+210403-14:15:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:15:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:15:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:16:18 [INFO] -- Poll: TimesUp 45165 0
+210403-14:16:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:16:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:16:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:17:18 [INFO] -- Poll: TimesUp 50877 0
+210403-14:17:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:17:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:17:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:18:18 [INFO] -- Poll: TimesUp 97595 0
+210403-14:18:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:18:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:18:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:19:18 [INFO] -- Poll: TimesUp 17670 0
+210403-14:19:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:19:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:19:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:20:18 [INFO] -- Poll: TimesUp 40695 0
+210403-14:20:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:20:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:20:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:21:18 [INFO] -- Poll: TimesUp 54668 0
+210403-14:21:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:21:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:21:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:22:18 [INFO] -- Poll: TimesUp 70122 0
+210403-14:22:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:22:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:22:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:23:18 [INFO] -- Poll: TimesUp 93372 0
+210403-14:23:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:23:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:23:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:24:18 [INFO] -- Poll: TimesUp 87131 0
+210403-14:24:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:24:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:24:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:25:18 [INFO] -- Poll: TimesUp 20014 0
+210403-14:25:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:25:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:25:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:26:18 [INFO] -- Poll: TimesUp 51785 0
+210403-14:26:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:26:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:26:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:27:18 [INFO] -- Poll: TimesUp 94869 0
+210403-14:27:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:27:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:27:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:28:18 [INFO] -- Poll: TimesUp 15953 0
+210403-14:28:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:28:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:28:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:29:18 [INFO] -- Poll: TimesUp 47997 0
+210403-14:29:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:29:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:29:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:30:18 [INFO] -- Poll: TimesUp 26482 0
+210403-14:30:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:30:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:30:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:31:18 [INFO] -- Poll: TimesUp 73278 0
+210403-14:31:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:31:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:31:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:32:18 [INFO] -- Poll: TimesUp 81883 0
+210403-14:32:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:32:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:32:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:33:18 [INFO] -- Poll: TimesUp 35167 0
+210403-14:33:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:33:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:33:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:34:18 [INFO] -- Poll: TimesUp 47999 0
+210403-14:34:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:34:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:34:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:35:18 [INFO] -- Poll: TimesUp 73824 0
+210403-14:35:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:35:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:35:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:36:18 [INFO] -- Poll: TimesUp 86309 0
+210403-14:36:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:36:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:36:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:37:18 [INFO] -- Poll: TimesUp 79152 0
+210403-14:37:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:37:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:37:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:38:18 [INFO] -- Poll: TimesUp 44113 0
+210403-14:38:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:38:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:38:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:39:18 [INFO] -- Poll: TimesUp 24270 0
+210403-14:39:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:39:18 [INFO] -- PollAck: TouchDisplayHandler is up!
+210403-14:39:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:40:18 [INFO] -- Poll: TimesUp 66337 0
+210403-14:40:18 [INFO] -- PollAck: KeypadHandler is up!
+210403-14:40:18 [INFO] -- PollAck: CardReaderHandler is up!
+210403-14:40:18 [INFO] -- PollAck: TouchDisplayHandler is up!

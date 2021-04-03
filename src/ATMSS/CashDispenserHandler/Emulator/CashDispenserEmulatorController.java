@@ -27,13 +27,15 @@ public class CashDispenserEmulatorController {
         this.appKickstarter = appKickstarter;
         this.log = log;
         this.cashDispenserEmulator = cashDispenserEmulator;
+        this.cashDispenserMBox = appKickstarter.getThread("CashDispenserHandler").getMBox();
     } // initialize
-
 
     //------------------------------------------------------------
     // buttonPressed
     public void buttonPressed(ActionEvent actionEvent) {
         Button btn = (Button) actionEvent.getSource();
-        String btnTxt = "Cash Dispensed";
+        String btnTxt = "Waiting";
+        System.out.println(btnTxt);
+        cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.TD_UpdateDisplay, btnTxt));
     }
 } // CardDispenserEmulatorController

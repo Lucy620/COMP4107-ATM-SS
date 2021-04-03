@@ -69,7 +69,7 @@ public class ATMSSEmulatorStarter extends ATMSSStarter {
 	        touchDisplayEmulator = new TouchDisplayEmulator("TouchDisplayHandler", atmssEmulatorStarter);
 	        advicePrinterEmulator = new AdvicePrinterEmulator("AdvicePrinterHandler",atmssEmulatorStarter);
 	        cashCollectorEmulator = new CashCollectorEmulator("CashCollectorHandler",atmssEmulatorStarter);
-			cashDispenserEmulator = new CashDispenserEmulator("CashDispenseEmulator",atmssEmulatorStarter);
+			cashDispenserEmulator = new CashDispenserEmulator("CashDispenserHandler",atmssEmulatorStarter);
 
 			// start emulator GUIs
 		keypadEmulator.start();
