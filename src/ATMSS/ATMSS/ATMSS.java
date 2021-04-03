@@ -122,7 +122,7 @@ public class ATMSS extends AppThread {
     private void processMouseClicked(Msg msg) {
 		if (msg.getDetails().compareToIgnoreCase("EjectCard") == 0) {
 			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
-		}else if(msg.getDetails().compareToIgnoreCase("EjectCardandAdvice") == 0){
+		}else if(msg.getDetails().compareToIgnoreCase("PrintAdvice") == 0){
 			cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
 			advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
 		}
