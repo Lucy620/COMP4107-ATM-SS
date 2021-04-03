@@ -36,7 +36,7 @@ public class CashDispenserEmulator extends CashDispenserHandler {
         Parent root;
         myStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
-        String fxmlName = "CashDispenserEmulator.fxml";
+        String fxmlName = "CashDispenserEmulatorWaiting.fxml";
         loader.setLocation(CashDispenserEmulator.class.getResource(fxmlName));
         root = loader.load();
         cashDispenserEmulatorController = (CashDispenserEmulatorController) loader.getController();
