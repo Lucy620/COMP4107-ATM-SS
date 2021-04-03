@@ -31,13 +31,13 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
         Parent root;
         myStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
-        String fxmlName = "AdvicePrinterEmulator.fxml";
+        String fxmlName = "AdvicePrinterDefault.fxml";
         loader.setLocation(AdvicePrinterEmulator.class.getResource(fxmlName));
         root = loader.load();
         advicePrinterEmulatorController = (AdvicePrinterEmulatorController) loader.getController();
         advicePrinterEmulatorController.initialize(id, atmssStarter, log, this);
         myStage.initStyle(StageStyle.DECORATED);
-        myStage.setScene(new Scene(root, 300, 200));
+        myStage.setScene(new Scene(root, 350, 470));
         myStage.setTitle("AdvicePrinterHandler");
         myStage.setResizable(false);
         myStage.setOnCloseRequest((WindowEvent event) -> {
