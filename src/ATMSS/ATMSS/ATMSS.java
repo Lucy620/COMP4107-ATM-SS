@@ -15,6 +15,7 @@ import AppKickstarter.timer.Timer;
 //======================================================================
 // ATMSS
 public class ATMSS extends AppThread {
+
     private int pollingTime;
     private MBox cardReaderMBox;
     private MBox keypadMBox;
@@ -24,7 +25,8 @@ public class ATMSS extends AppThread {
     private BAMSHandler bams;
 
     private boolean login = false;
-    private String cardNo = "";
+    private static String cardNo = "";
+    private String accNo="";
     private String textField = "";
     private MBox cashCollectorMBox;
 
@@ -61,12 +63,24 @@ public class ATMSS extends AppThread {
 
                 case TD_MouseClicked:
                     log.info("MouseCLicked: " + msg.getDetails());
-                    processMouseClicked(msg);
+                    try {
+                        processMouseClicked(msg);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (BAMSInvalidReplyException e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 case KP_KeyPressed:
                     log.info("KeyPressed: " + msg.getDetails());
-                    processKeyPressed(msg);
+                    try {
+                        processKeyPressed(msg);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (BAMSInvalidReplyException e) {
+                        e.printStackTrace();
+                    }
 
                     break;
 
@@ -106,7 +120,7 @@ public class ATMSS extends AppThread {
 
     //------------------------------------------------------------
     // processKeyPressed
-    private void processKeyPressed(Msg msg) {
+    private void processKeyPressed(Msg msg) throws IOException, BAMSInvalidReplyException {
 
         // *** The following is an example only!! ***
         if (msg.getDetails().compareToIgnoreCase("Cancel") == 0) {
@@ -147,19 +161,11 @@ public class ATMSS extends AppThread {
         } else if (msg.getDetails().compareToIgnoreCase(".") == 0) {
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "."));
         } else if (msg.getDetails().startsWith("Enter")) {
-
             if(!login){
-                System.out.println("login");
-                try{
-                    cardValidation(bams);
-                    textField="";
-                }catch (IOException e){
-                    e.printStackTrace();
-                }catch (BAMSInvalidReplyException e) {
-                    e.printStackTrace();
-                }
+                cardValidation(bams);
+                textField="";
             }
-            //touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, msg.getDetails()));
+
         } else if (msg.getDetails().compareToIgnoreCase("Erase") == 0) {
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Clear"));
         } else if (msg.getDetails().compareToIgnoreCase("???") == 0) {
@@ -171,7 +177,7 @@ public class ATMSS extends AppThread {
 
     //------------------------------------------------------------
     // processMouseClicked
-    private void processMouseClicked(Msg msg) {
+    private void processMouseClicked(Msg msg) throws IOException, BAMSInvalidReplyException {
         if (msg.getDetails().compareToIgnoreCase("EjectCard") == 0) {
             cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
         } else if (msg.getDetails().compareToIgnoreCase("PrintAdvice") == 0) {
@@ -183,7 +189,15 @@ public class ATMSS extends AppThread {
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TD_AfterDispensing"));
         } else if(msg.getDetails().compareToIgnoreCase("CollectorOpen") == 0) {
 			cashCollectorMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Open"));
-		}
+		}else if(msg.getDetails().compareToIgnoreCase("View Balance") == 0) {
+            GetAcc(bams);
+        }else if(msg.getDetails().startsWith("detail")){
+            String str = msg.getDetails();
+            for (int k = 6; k < str.length(); k++) {
+                accNo += str.charAt(k);
+            }
+            Enquiry(bams);
+        }
 
 	} // processMouseClicked
 
@@ -200,10 +214,23 @@ public class ATMSS extends AppThread {
         } catch (Exception e) {
             System.out.println("TestBAMSHandler: " + e.getMessage());
         }
+    }
 
-        System.out.println();
+    private void GetAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+        System.out.println("GetAcc:");
+        String accounts = bams.getAccounts(cardNo, "cred-1");
+        touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "balance"+accounts));
+        System.out.println("accounts: " + accounts);
 
     }
+
+    private void Enquiry(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+        System.out.println("Enquiry:");
+        double amount = bams.enquiry(cardNo, accNo,"cred-1");
+        accNo="";
+        System.out.println("amount: " + amount);
+        touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "amount"+amount));
+    } // testEnquiry
 
     private void cardReaderInsertPressed(Msg msg) {
         touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "PasswordConfirm"));

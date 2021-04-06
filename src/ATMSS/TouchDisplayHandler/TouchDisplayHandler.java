@@ -4,6 +4,8 @@ import ATMSS.HWHandler.HWHandler;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 
+import java.io.IOException;
+
 
 //======================================================================
 // TouchDisplayHandler

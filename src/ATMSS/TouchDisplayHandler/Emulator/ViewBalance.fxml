@@ -14,7 +14,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
             <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" onMouseClicked="#PickAction" height="480.0" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
-            <Label layoutX="100.0" layoutY="60.0" text="Account Balance: ">
+            <Label layoutX="100.0" layoutY="60.0" fx:id="amountLabel" text="Account Balance: ">
                 <font>
                     <Font size="24.0" />
                 </font>

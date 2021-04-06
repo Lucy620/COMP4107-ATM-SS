@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
+
 
 //======================================================================
 // TouchDisplayEmulator
@@ -28,6 +30,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
     public TextField account1;
 	public int AccountCount = 0;
 	public TextField WithdrawalTextField;
+	public String[] AccountList = {"","","",""};
     //------------------------------------------------------------
     // TouchDisplayEmulator
     public TouchDisplayEmulator(String id, ATMSSStarter atmssStarter) throws Exception {
@@ -72,6 +75,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 				account += str.charAt(k);
 			}
 
+
 			if (AccountCount == 0) {
 				touchDisplayEmulatorController.TransferField1(account);
 				AccountCount++;
@@ -85,7 +89,73 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			}
 
 			System.out.println(touchDisplayEmulatorController.getAccount1());
-		} else {
+		}else if(msg.getDetails().startsWith("balance")){
+			String str = msg.getDetails();
+			String account = "";
+			for (int k = 7; k < str.length(); k++) {
+				account += str.charAt(k);
+			}
+			System.out.println(account);
+			AccountList = account.split("/");
+			for (int i=0; i<AccountList.length;i++){
+				System.out.println(AccountList[i]);
+			}
+			TouchDisplayEmulator touchDisplayEmulator = this;
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						log.info(id + ": loading fxml: " + "SelectAccount.fxml");
+
+						Parent root;
+						FXMLLoader loader = new FXMLLoader();
+						loader.setLocation(TouchDisplayEmulator.class.getResource("SelectAccount.fxml"));
+						root = loader.load();
+
+						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
+						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+						myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+						touchDisplayEmulatorController.updateAccountLabel(AccountList);
+					} catch (Exception e) {
+						log.severe(id + ": failed to load " + "SelectAccount.fxml");
+						e.printStackTrace();
+					}
+				}
+			});
+
+
+		}else if(msg.getDetails().startsWith("amount")){
+			String str = msg.getDetails();
+			String amount = "";
+			for (int k = 6; k < str.length(); k++) {
+				amount += str.charAt(k);
+			}
+			String finalAmount = amount;
+			TouchDisplayEmulator touchDisplayEmulator = this;
+
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						log.info(id + ": loading fxml: " + "ViewBalance.fxml");
+
+						Parent root;
+						FXMLLoader loader = new FXMLLoader();
+						loader.setLocation(TouchDisplayEmulator.class.getResource("ViewBalance.fxml"));
+						root = loader.load();
+
+						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
+						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+						myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+						touchDisplayEmulatorController.updateAmount(finalAmount);
+					} catch (Exception e) {
+						log.severe(id + ": failed to load " + "ViewBalance.fxml");
+						e.printStackTrace();
+					}
+				}
+			});
+
+		}else {
 
 			switch (msg.getDetails()) {
 				case "BlankScreen":

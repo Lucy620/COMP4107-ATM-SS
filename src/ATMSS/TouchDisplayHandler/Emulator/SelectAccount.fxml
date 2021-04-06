@@ -13,29 +13,34 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
             <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" onMouseClicked="#select_mouseClick" height="480.0" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
             <Label layoutX="200.0" layoutY="60.0" text="Select Account ">
                 <font>
                     <Font size="36.0" />
                 </font>
             </Label>
-            <Label layoutX="90.0" layoutY="292.0"  text="Account 1" onMouseClicked="#ViewBalance">
-
+            <Label fx:id="Account1" layoutX="90.0" layoutY="292.0"   onMouseClicked="#ViewBalance" text="">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="440.0" layoutY="292.0" onMouseClicked="#ViewBalance" text="Account 2" >
+            <Label layoutX="440.0" layoutY="292.0" onMouseClicked="#ViewBalance" fx:id="Account2" text="">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="90.0" layoutY="362.0" onMouseClicked="#ViewBalance" text="Account 3" >
+            <Label layoutX="90.0" layoutY="362.0" onMouseClicked="#ViewBalance" fx:id="Account3" text="">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="440.0" layoutY="362.0" text="Account 4" onMouseClicked="#ViewBalance">
+            <Label layoutX="440.0" layoutY="362.0" fx:id="Account4" onMouseClicked="#ViewBalance" text="">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Label>
+            <Label layoutX="110.0" layoutY="432.0" onMouseClicked="#BackToMenu" text="Back" >
                 <font>
                     <Font size="24.0" />
                 </font>
