@@ -44,18 +44,6 @@ public class ATMSSStarter extends AppKickstarter {
 		String urlPrefix = "http://cslinux0.comp.hkbu.edu.hk/comp4107_20-21_grp06/";
 		BAMSHandler bams = new BAMSHandler(urlPrefix,initLogger());
 
-		try{
-			testLogin(bams);
-			testGetAcc(bams);
-			//testWithdraw(bams);
-			//testDeposit(bams);
-			testEnquiry(bams);
-			testTransfer(bams);
-		}catch (Exception e){
-			System.out.println("TestBAMSHandler: Exception caught: " + e.getMessage());
-			e.printStackTrace();
-		}
-		return;
     } // main
 	static Logger initLogger() {
 		// init our logger

@@ -27,6 +27,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
     private TouchDisplayEmulatorController touchDisplayEmulatorController;
     public TextField account1;
 	public int AccountCount = 0;
+	public TextField WithdrawalTextField;
     //------------------------------------------------------------
     // TouchDisplayEmulator
     public TouchDisplayEmulator(String id, ATMSSStarter atmssStarter) throws Exception {
@@ -153,7 +154,9 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					break;
 
 				case "EnterWithdrawal":
+					String amount = WithdrawalTextField.getText();
 					reloadStage("TouchDisplayWaitWithdrawal.fxml");
+
 					break;
 
 				case "EnterPin":
