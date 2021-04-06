@@ -4,16 +4,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.CashCollector.Emulator.CashCollectorEmulatorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0"
+            prefWidth="483.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ATMSS.CashCollector.Emulator.CashCollectorEmulatorController">
     <children>
         <Button layoutX="50.0" layoutY="200.0" mnemonicParsing="false" text="100" textAlignment="CENTER">
             <font>
-                <Font size="24.0" />
+                <Font size="24.0"/>
             </font>
         </Button>
         <Button layoutX="200.0" layoutY="200.0" mnemonicParsing="false" text="500" textAlignment="CENTER">
             <font>
-                <Font size="24.0" />
+                <Font size="24.0"/>
             </font>
         </Button>
         <Button layoutX="350.0" layoutY="200.0" mnemonicParsing="false" text="1000" textAlignment="CENTER">
@@ -21,9 +23,9 @@
                 <Font size="24.0" />
             </font>
         </Button>
-        <Button layoutX="190.0" layoutY="350.0" mnemonicParsing="false" text="Insert" textAlignment="CENTER">
+        <Button layoutX="190.0" layoutY="350.0" onAction="#buttonPressed" text="Insert" textAlignment="CENTER">
             <font>
-                <Font size="24.0" />
+                <Font size="24.0"/>
             </font>
         </Button>
         <Label layoutX="60.0" layoutY="50.0" prefHeight="54.0" prefWidth="379.0" text="Cash Amount:             HKD" textAlignment="CENTER">

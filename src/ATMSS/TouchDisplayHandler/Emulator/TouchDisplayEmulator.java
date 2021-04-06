@@ -100,6 +100,10 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					reloadStage("TouchDisplayConfirmation.fxml");
 					break;
 
+				case "DepositConfirmation":
+					reloadStage("TouchDisplayDepositViewBalance.fxml");
+					break;
+
 				case "Withdrawal":
 					reloadStage("TouchDisplayWithdrawal.fxml");
 					break;

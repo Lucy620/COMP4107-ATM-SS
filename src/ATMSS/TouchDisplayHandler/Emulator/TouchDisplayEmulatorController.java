@@ -211,22 +211,15 @@ public class TouchDisplayEmulatorController {
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
 
-        if(x <= 300 && y >= 410){
+        if (x <= 300 && y >= 410) {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "CollectorOpen"));
+        } else if (x >= 340 && y >= 340 && y <= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "DepositConfirmation"));
         }
     }
 
     public void CashCollectorOpenLabel(MouseEvent mouseEvent){
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "CollectorOpen"));
-    }
-
-    public void DepositConfirmation(MouseEvent mouseEvent){
-        int x = (int) mouseEvent.getX();
-        int y = (int) mouseEvent.getY();
-
-        if(x >= 340 && y>=340 && y<=410){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "DepositConfirmation"));
-        }
     }
 
     public void DepositConfirmationLabel(MouseEvent mouseEvent){
