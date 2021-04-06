@@ -133,6 +133,10 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					reloadStage("ViewBalance.fxml");
 					break;
 
+				case "EjectBalance":
+					reloadStage("TouchDisplayEjectBalance.fxml");
+					break;
+
 				case "View Balance":
 					reloadStage("SelectAccount.fxml");
 					break;
@@ -162,8 +166,8 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 				case "EnterPin":
 					break;
 
-				case "TD_AfterDispensing":
-					reloadStage("AfterDispensing.fxml");
+				case "TD_AfterDepWit":
+					reloadStage("TouchDisplayAfterDepositWithdrawal.fxml");
 					break;
 
 				default:

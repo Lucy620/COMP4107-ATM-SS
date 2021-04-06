@@ -36,7 +36,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="466.0" layoutY="432.0" text="Eject">
+            <Label layoutX="466.0" layoutY="432.0" onMouseClicked="#EjectCard" text="Eject">
                <font>
                   <Font size="24.0" />
                </font>
