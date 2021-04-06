@@ -51,7 +51,8 @@ public class CardReaderHandler extends HWHandler {
     //------------------------------------------------------------
     // handleCardEject
     protected void handleCardEject() {
-	log.info(id + ": card ejected");
+        atmss.send(new Msg(id, cardReaderMBox, Msg.Type.TD_MouseClicked, "BlankScreen"));
+        log.info(id + ": card ejected");
     } // handleCardEject
 
 
@@ -59,6 +60,5 @@ public class CardReaderHandler extends HWHandler {
     // handleCardRemove
     protected void handleCardRemove() {
 	    log.info(id + ": card removed");
-        atmss.send(new Msg(id, cardReaderMBox, Msg.Type.TD_MouseClicked, "BlankScreen"));
     } // handleCardRemove
 } // CardReaderHandler
