@@ -19,10 +19,6 @@ public class CashCollectorHandler extends HWHandler{
     // processMsg
     protected void processMsg(Msg msg) {
         switch (msg.getType()) {
-            case TD_MouseClicked: // need to be updated
-                atmss.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
-                break;
-
             case TD_UpdateDisplay: // need to be updated
                 handleUpdateDisplay(msg);
                 break;

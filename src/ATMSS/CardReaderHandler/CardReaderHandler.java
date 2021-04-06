@@ -3,12 +3,15 @@ package ATMSS.CardReaderHandler;
 import ATMSS.HWHandler.HWHandler;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
+import AppKickstarter.misc.MBox;
 
 import ATMSS.ATMSSEmulatorStarter;
 
 //======================================================================
 // CardReaderHandler
 public class CardReaderHandler extends HWHandler {
+    private MBox cardReaderMBox;
+
     //------------------------------------------------------------
     // CardReaderHandler
     public CardReaderHandler(String id, AppKickstarter appKickstarter) {
@@ -48,13 +51,14 @@ public class CardReaderHandler extends HWHandler {
     //------------------------------------------------------------
     // handleCardEject
     protected void handleCardEject() {
-	log.info(id + ": card ejected");
+        atmss.send(new Msg(id, cardReaderMBox, Msg.Type.TD_MouseClicked, "BlankScreen"));
+        log.info(id + ": card ejected");
     } // handleCardEject
 
 
     //------------------------------------------------------------
     // handleCardRemove
     protected void handleCardRemove() {
-	log.info(id + ": card removed");
+	    log.info(id + ": card removed");
     } // handleCardRemove
 } // CardReaderHandler

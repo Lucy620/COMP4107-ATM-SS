@@ -34,6 +34,6 @@ public class CashDispenserEmulatorController {
     // buttonPressed
     public void buttonPressed(ActionEvent actionEvent) {
         cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.TD_UpdateDisplay, "Waiting"));
-        cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.TD_MouseClicked, "TD_AfterDispensing"));
+        cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.TD_MouseClicked, "TD_AfterDepWit"));
     }
 } // CardDispenserEmulatorController

@@ -9,7 +9,8 @@
     <AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
         <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="72.0" onMouseClicked="#ViewBalance" layoutX="339.0" layoutY="409.0" stroke="BLACK" strokeType="OUTSIDE" width="302.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="72.0" layoutX="339.0" layoutY="409.0"
+                       stroke="BLACK" strokeType="OUTSIDE" width="302.0"/>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#CashCollectorOpen" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
 
             <Label layoutX="96.0" layoutY="14.0" text="You have deposited the following amount:">
@@ -58,16 +59,14 @@
                     <Font size="18.0" />
                 </font>
             </Label>
-
-
             <Label layoutX="61.0" layoutY="428.0" onMouseClicked="#CashCollectorOpenLabel" text="Reentry banknotes">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="451.0" layoutY="428.0" onMouseClicked="#ViewBalance" text="Confirm">
+            <Label layoutX="451.0" layoutY="428.0" onMouseClicked="#DepositConfirmationLabel" text="Confirm">
                 <font>
-                    <Font size="24.0" />
+                    <Font size="24.0"/>
                 </font>
             </Label>
         </children>

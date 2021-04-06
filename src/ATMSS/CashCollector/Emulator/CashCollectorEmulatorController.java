@@ -31,9 +31,7 @@ public class CashCollectorEmulatorController {
     }// initialize
 
     public void buttonPressed(ActionEvent actionEvent) {
-        Button btn = (Button) actionEvent.getSource();
-        String btnTxt = "Advice is taken.";
-        cashDepositCollectorMBox.send(new Msg(id, cashDepositCollectorMBox, Msg.Type.KP_KeyPressed, btnTxt));
+        cashDepositCollectorMBox.send(new Msg(id, cashDepositCollectorMBox, Msg.Type.TD_UpdateDisplay, "Waiting"));
     } // buttonPressed
     //------------------------------------------------------------
     // functions

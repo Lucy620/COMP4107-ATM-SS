@@ -81,7 +81,7 @@ public class CashCollectorEmulator extends CashCollectorHandler {
                     root = loader.load();
                     cashCollectorEmulatorController = (CashCollectorEmulatorController) loader.getController();
                     cashCollectorEmulatorController.initialize(id, atmssStarter, log, cashCollectorEmulator);
-                    myStage.setScene(new Scene(root, 470, 370));
+                    myStage.setScene(new Scene(root, 470, 500));
                 } catch (Exception e) {
                     log.severe(id + ": failed to load " + fxmlFName);
                     e.printStackTrace();

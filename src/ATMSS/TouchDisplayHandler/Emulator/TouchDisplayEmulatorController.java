@@ -221,22 +221,15 @@ public class TouchDisplayEmulatorController {
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
 
-        if(x <= 300 && y >= 410){
+        if (x <= 300 && y >= 410) {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "CollectorOpen"));
+        } else if (x >= 340 && y >= 340 && y <= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "DepositConfirmation"));
         }
     }
 
     public void CashCollectorOpenLabel(MouseEvent mouseEvent){
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "CollectorOpen"));
-    }
-
-    public void DepositConfirmation(MouseEvent mouseEvent){
-        int x = (int) mouseEvent.getX();
-        int y = (int) mouseEvent.getY();
-
-        if(x >= 340 && y>=340 && y<=410){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "DepositConfirmation"));
-        }
     }
 
     public void DepositConfirmationLabel(MouseEvent mouseEvent){
@@ -293,6 +286,18 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
     }
 
+    public void EjectCardandBalance(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "EjectBalance"));
+
+    }
+
     public void EjectCardandAdvice(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
@@ -304,6 +309,20 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
     }
+
+    public void EjectCardandBalanceandAdvice(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "EjectBalance"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
+    }
+
     public void select_mouseClick(MouseEvent mouseEvent) {
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
