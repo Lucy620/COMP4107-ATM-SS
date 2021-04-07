@@ -38,6 +38,7 @@ public class TouchDisplayEmulatorController {
     public Label Account3;
     public Label Account4;
     public Label amountLabel;
+    public Label errorPin; //change pin
 
 
 
@@ -93,7 +94,7 @@ public class TouchDisplayEmulatorController {
     public void EnterNumber(){
         switch (WithdrawalTextField.getStyle()){
             case "Pin":
-                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "EnterPin"));
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Change Password"));
                 break;
 
             case "EnterDeposit":
@@ -131,6 +132,8 @@ public class TouchDisplayEmulatorController {
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"View Balance"));
         }else if(x >= 340 && y>=410 && y<=480){
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"Eject Card"));
+        }else if(x <= 300 && y >= 410){
+            touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"Change Password"));
         }
     }// td_mouseClick
 
@@ -240,8 +243,42 @@ public class TouchDisplayEmulatorController {
         if(x <= 300 && y >= 410){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
         }else if(x >= 340 && y >= 410){
-
+            EjectCard(mouseEvent);
+        }else if(x <= 300 && y >= 340 && y <= 410){
+            AdviceOnly(mouseEvent);
+        }else if( x >= 340 && y >= 340 && y <= 410){
+            EjectCardandAdvice(mouseEvent);
         }
+    }
+
+    public void finishChangePin(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        if(x <= 300 && y >= 410){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+        }
+    }
+
+    public void AdviceOnly(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdviceOnly"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+    }
+
+    public void InvalidPin(){
+        System.out.println(errorPin.getText());
+        errorPin.setText("Invalid New Password!");
     }
 
     public void EnterTransfer(){

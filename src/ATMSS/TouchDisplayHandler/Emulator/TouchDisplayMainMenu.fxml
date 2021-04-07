@@ -31,12 +31,12 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label  layoutX="424.0" layoutY="362.0" onMouseClicked="#td_mouseClick2" text="View Balance">
+            <Label layoutX="424.0" layoutY="362.0" onMouseClicked="#td_mouseClick2" text="View Balance">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="443.0" layoutY="432.0" onMouseClicked="#EjectCard" text="Eject Card">
+            <Label layoutX="440.0" layoutY="432.0" onMouseClicked="#EjectCard" text="Eject Card">
                <font>
                   <Font size="24.0" />
                </font>
@@ -44,6 +44,11 @@
             <Label layoutX="237.0" layoutY="48.0" text="Main Menu">
                <font>
                   <Font size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="59.0" layoutY="432.0"onMouseClicked="#td_mouseClick2" text="Change Password">
+               <font>
+                  <Font size="24.0" />
                </font>
             </Label>
 	    </children>

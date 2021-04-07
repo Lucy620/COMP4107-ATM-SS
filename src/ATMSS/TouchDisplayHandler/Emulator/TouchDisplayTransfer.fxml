@@ -16,22 +16,22 @@
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
                 <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#TransferClick" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
-                <Label fx:id="a" layoutX="72.0" layoutY="292.0" onMouseClicked="#TransferClickLabel" text="">
+                <Label fx:id="a" layoutX="132.0" layoutY="292.0" onMouseClicked="#TransferClickLabel" text="">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Label fx:id="b" layoutX="412.0" layoutY="292.0" onMouseClicked="#TransferClickLabel" text="">
+                <Label fx:id="b" layoutX="472.0" layoutY="292.0" onMouseClicked="#TransferClickLabel" text="">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Label fx:id="c" layoutX="72.0" layoutY="362.0" onMouseClicked="#TransferClickLabel" text="">
+                <Label fx:id="c" layoutX="132.0" layoutY="362.0" onMouseClicked="#TransferClickLabel" text="">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Label fx:id="d" layoutX="412.0" layoutY="362.0" onMouseClicked="#TransferClickLabel" text="">
+                <Label fx:id="d" layoutX="472.0" layoutY="362.0" onMouseClicked="#TransferClickLabel" text="">
                     <font>
                         <Font size="24.0" />
                     </font>

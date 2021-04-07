@@ -22,6 +22,7 @@ public class CardReaderEmulatorController {
     public TextField cardNumField;
     public TextField cardStatusField;
     public TextArea cardReaderTextArea;
+    public boolean CardInsert = true;
 
 
     //------------------------------------------------------------
@@ -59,6 +60,7 @@ public class CardReaderEmulatorController {
 
 	    case "Insert Card":
 		if (cardNumField.getText().length() != 0) {
+			CardInsert = false;
 		    cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardInserted, cardNumField.getText()));
 		    cardReaderTextArea.appendText("Sending " + cardNumField.getText()+"\n");
 		    cardStatusField.setText("Card Inserted");
@@ -67,8 +69,9 @@ public class CardReaderEmulatorController {
 
 	    case "Remove Card":
 	        if (cardStatusField.getText().compareTo("Card Ejected") == 0) {
-		    cardReaderTextArea.appendText("Removing card\n");
-		    cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardRemoved, cardNumField.getText()));
+	        	CardInsert = true;
+		        cardReaderTextArea.appendText("Removing card\n");
+		    	cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardRemoved, cardNumField.getText()));
 
 		}
 		break;

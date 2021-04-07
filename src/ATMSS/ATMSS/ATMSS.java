@@ -38,6 +38,8 @@ public class ATMSS extends AppThread {
     private int transferCount = 0;
     private MBox cashCollectorMBox;
 
+    private String oldPin = "";
+    private String newPin = "";
     //------------------------------------------------------------
     // ATMSS
     public ATMSS(String id, AppKickstarter appKickstarter) throws Exception {
@@ -230,6 +232,8 @@ public class ATMSS extends AppThread {
             CardReaderEmpty=true;
         }else if(msg.getDetails().compareToIgnoreCase("CardInserted") == 0){
             CardReaderEmpty=false;
+        }else if(msg.getDetails().compareToIgnoreCase("Change Password") == 0){
+            ChangePassword(bams);
         }
 
 	} // processMouseClicked
@@ -242,16 +246,38 @@ public class ATMSS extends AppThread {
         System.out.println("Login:");
         try {
             String cred = bams.login(cardNo, textField);
-            textField="";
             System.out.println("cred: " + cred);
             if(cred.equals("Success Login")){
                 login=true;
-                System.out.println("123");
+                oldPin = textField;
                 touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
             }
+            textField="";
         } catch (Exception e) {
             System.out.println("TestBAMSHandler: " + e.getMessage());
         }
+    }
+
+    private void ChangePassword(BAMSHandler bams) throws BAMSInvalidReplyException, IOException{
+        System.out.println("ChangePin:");
+        newPin = textField;
+        if(textField.length() != 6){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Invalid Pin"));
+            newPin = "";
+        }else{
+            String accounts = bams.chgPinReq(cardNo,oldPin,newPin,"cred-1");
+            if(accounts.equals("succ")){
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Change Complete"));
+                oldPin = newPin;
+                newPin = "";
+            }else{
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Invalid Pin"));
+                newPin = "";
+            }
+            textField = "";
+            System.out.println("accounts: " + accounts);
+        }
+
     }
 
     private void TransferAccount(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {

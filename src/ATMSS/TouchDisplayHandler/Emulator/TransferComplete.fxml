@@ -9,10 +9,12 @@
     <children>
         <AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
             <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.leftAnchor="0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="0" />
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" />
                 
-                <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" onMouseClicked="#finishTransfer" height="480.0" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+                <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#finishTransfer" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
                 <Label layoutX="119.0" layoutY="123.0" text="Your Transfer is Completed!">
                     <font>
                         <Font size="36.0" />
@@ -23,7 +25,17 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="439.0" layoutY="432.0" text="Eject Card">
+            <Label layoutX="439.0" layoutY="432.0" onMouseClicked="#EjectCard" text="Eject Card">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="362.0" onMouseClicked="#AdviceOnly" text="Print Advice Only">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="355.0" layoutY="362.0" onMouseClicked="#EjectCardandAdvice" text="Print Advice and Eject Card">
                <font>
                   <Font size="24.0" />
                </font>

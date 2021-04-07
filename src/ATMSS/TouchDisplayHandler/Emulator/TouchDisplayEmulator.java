@@ -285,11 +285,41 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					reloadStage("TransferComplete.fxml");
 					break;
 
-				case "EnterPin":
-					break;
-
 				case "TD_AfterDepWit":
 					reloadStage("TouchDisplayAfterDepositWithdrawal.fxml");
+					break;
+
+				case "Change Password":
+					reloadStage("TouchDisplayChangePassword.fxml");
+					break;
+
+				case "Change Complete":
+					reloadStage("TouchDisplayChangePasswordComplete.fxml");
+					break;
+
+				case "Invalid Pin":
+					TouchDisplayEmulator touchDisplayEmulator = this;
+
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								log.info(id + ": loading fxml: " + "TouchDisplayChangePassword.fxml");
+
+								Parent root;
+								FXMLLoader loader = new FXMLLoader();
+								loader.setLocation(TouchDisplayEmulator.class.getResource("TouchDisplayChangePassword.fxml"));
+								root = loader.load();
+								touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
+								touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+								myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+								touchDisplayEmulatorController.InvalidPin();
+							} catch (Exception e) {
+								log.severe(id + ": failed to load " + "TouchDisplayChangePassword.fxml");
+								e.printStackTrace();
+							}
+						}
+					});
 					break;
 
 				default:
