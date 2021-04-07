@@ -129,22 +129,18 @@ public class TouchDisplayEmulatorController {
             //touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Transfer"));
         }else if(x >= 340 && y >= 340 && y <= 410){
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"View Balance"));
+        }else if(x >= 340 && y>=410 && y<=480){
+            touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"Eject Card"));
         }
     }// td_mouseClick
 
     public void td_mouseClick2(MouseEvent mouseEvent){
-        int x = (int) mouseEvent.getX();
-        int y = (int) mouseEvent.getY();
-
-        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
-
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
         Label selectedLabel = ((Label) mouseEvent.getSource());
         String selectedText = selectedLabel.getText();
         //System.out.println(selectedText);
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, selectedText));
-        //touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
 
     }
 
@@ -341,12 +337,6 @@ public class TouchDisplayEmulatorController {
 
 
     public void EjectCard(MouseEvent mouseEvent){
-        int x = (int) mouseEvent.getX();
-        int y = (int) mouseEvent.getY();
-
-        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
-
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
     }

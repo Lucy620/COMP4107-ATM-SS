@@ -17,6 +17,7 @@ import AppKickstarter.timer.Timer;
 //======================================================================
 // ATMSS
 public class ATMSS extends AppThread {
+
     private int pollingTime;
     private MBox cardReaderMBox;
     private MBox keypadMBox;
@@ -27,7 +28,8 @@ public class ATMSS extends AppThread {
     public TextField WithdrawalTextField;
 
     private boolean login = false;
-    private static String cardNo = "";
+    private boolean CardReaderEmpty = true;
+    private String cardNo = "";
     private String accNo="";
     private String textField = "";
     private String fromAcc = ""; //transfer
@@ -69,11 +71,11 @@ public class ATMSS extends AppThread {
 
                 case TD_MouseClicked:
                     log.info("MouseCLicked: " + msg.getDetails());
-                    try{
+                    try {
                         processMouseClicked(msg);
-                    }catch (IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
-                    }catch (BAMSInvalidReplyException e){
+                    } catch (BAMSInvalidReplyException e) {
                         e.printStackTrace();
                     }
                     break;
@@ -201,17 +203,17 @@ public class ATMSS extends AppThread {
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
         } else if (msg.getDetails().compareToIgnoreCase("Dispensing") == 0) {
             cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Dispensing"));
-        } else if (msg.getDetails().compareToIgnoreCase("TD_AfterDispensing") == 0) {
-            touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TD_AfterDispensing"));
+        } else if (msg.getDetails().compareToIgnoreCase("TD_AfterDepWit") == 0) {
+            touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TD_AfterDepWit"));
         } else if(msg.getDetails().compareToIgnoreCase("CollectorOpen") == 0) {
 			cashCollectorMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Open"));
-		}else if (msg.getDetails().compareToIgnoreCase("EnterTransfer") == 0) {
+		}else if(msg.getDetails().compareToIgnoreCase("View Balance") == 0) {
+            GetAcc(bams);
+        }else if (msg.getDetails().compareToIgnoreCase("EnterTransfer") == 0) {
             TransferAccount(bams);
             clearTextFiled();
         } else if (msg.getDetails().startsWith("account")) {
             getTransferAcc(msg);
-        }else if(msg.getDetails().compareToIgnoreCase("View Balance") == 0) {
-            GetAcc(bams);
         }else if(msg.getDetails().startsWith("detail")){
             String str = msg.getDetails();
             for (int k = 6; k < str.length(); k++) {
@@ -219,9 +221,15 @@ public class ATMSS extends AppThread {
             }
             Enquiry(bams);
         } else if (msg.getDetails().compareToIgnoreCase("BlankScreen") == 0) {
+            cardNo="";
+            login=false;
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "BlankScreen"));
         }else if(msg.getDetails().compareToIgnoreCase("Transfer") == 0) {
             GetTransferAcc(bams);
+        }else if(msg.getDetails().compareToIgnoreCase("CardRemoved") == 0){
+            CardReaderEmpty=true;
+        }else if(msg.getDetails().compareToIgnoreCase("CardInserted") == 0){
+            CardReaderEmpty=false;
         }
 
 	} // processMouseClicked
@@ -234,10 +242,11 @@ public class ATMSS extends AppThread {
         System.out.println("Login:");
         try {
             String cred = bams.login(cardNo, textField);
+            textField="";
             System.out.println("cred: " + cred);
             if(cred.equals("Success Login")){
                 login=true;
-                //System.out.println("123");
+                System.out.println("123");
                 touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
             }
         } catch (Exception e) {
@@ -264,6 +273,22 @@ public class ATMSS extends AppThread {
 
     }
 
+    private void GetAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+        System.out.println("GetAcc:");
+        String accounts = bams.getAccounts(cardNo, "cred-1");
+        touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "balance"+accounts));
+        System.out.println("accounts: " + accounts);
+
+    }
+
+    public void GetTransferAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+        System.out.println("GetAcc:");
+        String accounts = bams.getAccounts(cardNo, "cred-1");
+        System.out.println("accounts: " + accounts);
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"transfer" + accounts));
+        System.out.println();
+    }
+
     private void getTransferAcc(Msg msg){
         String str = msg.getDetails();
         String fromto = "";
@@ -280,30 +305,13 @@ public class ATMSS extends AppThread {
         //System.out.println(fromAcc + "------" + toAcc);
     }
 
-    public void GetAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
-        System.out.println("GetAcc:");
-        String accounts = bams.getAccounts(cardNo, "cred-1");
-        System.out.println("accounts: " + accounts);
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"balance" + accounts));
-        System.out.println();
-    }
-
-    public void GetTransferAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
-        System.out.println("GetAcc:");
-        String accounts = bams.getAccounts(cardNo, "cred-1");
-        System.out.println("accounts: " + accounts);
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"transfer" + accounts));
-        System.out.println();
-    }
-
     public void Enquiry(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
         System.out.println("Enquiry:");
         double amount = bams.enquiry(cardNo, accNo,"cred-1");
         accNo="";
-        touchDisplayMBox.send(new Msg(id,touchDisplayMBox,Msg.Type.TD_UpdateDisplay,"amount"+amount));
         System.out.println("amount: " + amount);
-        System.out.println();
-    }
+        touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "amount"+amount));
+    } // testEnquiry
 
     private void cardReaderInsertPressed(Msg msg) {
         touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "PasswordConfirm"));

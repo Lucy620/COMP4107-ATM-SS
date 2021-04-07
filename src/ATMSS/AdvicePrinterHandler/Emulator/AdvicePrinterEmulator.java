@@ -22,6 +22,7 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
     private String id;
     private Stage myStage;
     private AdvicePrinterEmulatorController advicePrinterEmulatorController;
+    private String action ="";
 
     public AdvicePrinterEmulator(String id, ATMSSStarter atmssStarter) {
         super(id, atmssStarter);
@@ -51,6 +52,7 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
     }
 
     protected void handleUpdateDisplay(Msg msg) {
+
         switch (msg.getDetails()) {
             case "Printing":
                 reloadStage("AdvicePrinterEmulator.fxml");

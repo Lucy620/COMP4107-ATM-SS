@@ -20,22 +20,22 @@
                     <Font size="36.0" />
                 </font>
             </Label>
-            <Label fx:id="Account1" layoutX="90.0" layoutY="292.0"   onMouseClicked="#ViewBalance" text="">
+            <Label fx:id="Account1" layoutX="120.0" layoutY="292.0"   onMouseClicked="#ViewBalance" text="">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="440.0" layoutY="292.0" onMouseClicked="#ViewBalance" fx:id="Account2" text="">
+            <Label layoutX="470.0" layoutY="292.0" onMouseClicked="#ViewBalance" fx:id="Account2" text="">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="90.0" layoutY="362.0" onMouseClicked="#ViewBalance" fx:id="Account3" text="">
+            <Label layoutX="120.0" layoutY="362.0" onMouseClicked="#ViewBalance" fx:id="Account3" text="">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="440.0" layoutY="362.0" fx:id="Account4" onMouseClicked="#ViewBalance" text="">
+            <Label layoutX="470.0" layoutY="362.0" fx:id="Account4" onMouseClicked="#ViewBalance" text="">
                 <font>
                     <Font size="24.0" />
                 </font>
