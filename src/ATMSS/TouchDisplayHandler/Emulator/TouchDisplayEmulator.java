@@ -143,7 +143,6 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 						FXMLLoader loader = new FXMLLoader();
 						loader.setLocation(TouchDisplayEmulator.class.getResource("ViewBalance.fxml"));
 						root = loader.load();
-
 						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
 						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
 						myStage.setScene(new Scene(root, WIDTH, HEIGHT));

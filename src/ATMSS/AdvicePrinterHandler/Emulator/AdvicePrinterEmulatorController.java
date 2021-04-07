@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 
 
@@ -34,4 +35,6 @@ public class AdvicePrinterEmulatorController {
     public void buttonPressed(ActionEvent actionEvent) {
         advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.CR_EjectCard, "Waiting"));
     } // buttonPressed
+
+
 }

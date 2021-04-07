@@ -25,7 +25,8 @@ public class ATMSS extends AppThread {
     private BAMSHandler bams;
 
     private boolean login = false;
-    private static String cardNo = "";
+    private boolean CardReaderEmpty = true;
+    private String cardNo = "";
     private String accNo="";
     private String textField = "";
     private MBox cashCollectorMBox;
@@ -163,9 +164,7 @@ public class ATMSS extends AppThread {
         } else if (msg.getDetails().startsWith("Enter")) {
             if(!login){
                 cardValidation(bams);
-                textField="";
             }
-
         } else if (msg.getDetails().compareToIgnoreCase("Erase") == 0) {
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Clear"));
         } else if (msg.getDetails().compareToIgnoreCase("???") == 0) {
@@ -198,7 +197,14 @@ public class ATMSS extends AppThread {
             }
             Enquiry(bams);
         } else if (msg.getDetails().compareToIgnoreCase("BlankScreen") == 0) {
+            cardNo="";
+            login=false;
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "BlankScreen"));
+
+        }else if(msg.getDetails().compareToIgnoreCase("CardRemoved") == 0){
+            CardReaderEmpty=true;
+        }else if(msg.getDetails().compareToIgnoreCase("CardInserted") == 0){
+            CardReaderEmpty=false;
         }
 
 	} // processMouseClicked
@@ -207,6 +213,7 @@ public class ATMSS extends AppThread {
         System.out.println("Login:");
         try {
             String cred = bams.login(cardNo, textField);
+            textField="";
             System.out.println("cred: " + cred);
             if(cred.equals("Success Login")){
                 login=true;
