@@ -203,6 +203,8 @@ public class ATMSS extends AppThread {
         } else if (msg.getDetails().compareToIgnoreCase("PrintAdvice") == 0) {
             cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
+        }  else if (msg.getDetails().compareToIgnoreCase("PrintAdviceOnly") == 0) {
+            advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
         } else if (msg.getDetails().compareToIgnoreCase("Dispensing") == 0) {
             cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Dispensing"));
         } else if (msg.getDetails().compareToIgnoreCase("TD_AfterDepWit") == 0) {

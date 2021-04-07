@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="BAMSHandler-v02">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/BAMSHandler-v02.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
