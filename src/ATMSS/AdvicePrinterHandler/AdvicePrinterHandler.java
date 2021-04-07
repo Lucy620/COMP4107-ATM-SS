@@ -20,6 +20,10 @@ public class AdvicePrinterHandler extends HWHandler{
                 handleUpdateDisplay(msg);
                 break;
 
+            case TD_MouseClicked:
+                handleUpdateLabel(msg);
+                break;
+
             default:
                 log.warning(id + ": unknown message type: [" + msg + "]");
         }
@@ -28,6 +32,10 @@ public class AdvicePrinterHandler extends HWHandler{
     protected void handleUpdateDisplay(Msg msg) {
         log.info(id + ": update display -- " + msg.getDetails());
     } // handleUpdateDisplay
+
+    protected void handleUpdateLabel(Msg msg) {
+        log.info(id + ": update display -- " + msg.getDetails());
+    } // handleUpdateLabel
 
 
 }

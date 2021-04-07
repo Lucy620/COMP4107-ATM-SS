@@ -94,7 +94,6 @@ public class ATMSS extends AppThread {
 
                 case CR_CardInserted:
                     log.info("MouseCLicked: " + msg.getDetails());
-                    //status=""
                     cardNo=msg.getDetails();
                     cardReaderInsertPressed(msg);
                     break;
@@ -232,6 +231,10 @@ public class ATMSS extends AppThread {
             CardReaderEmpty=true;
         }else if(msg.getDetails().compareToIgnoreCase("CardInserted") == 0){
             CardReaderEmpty=false;
+        }else if(msg.getDetails().startsWith("action")){
+            advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
+        }else if(msg.getDetails().startsWith("amount")){
+            advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
         }
 
 	} // processMouseClicked
@@ -280,7 +283,6 @@ public class ATMSS extends AppThread {
         String accounts = bams.getAccounts(cardNo, "cred-1");
         touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "balance"+accounts));
         System.out.println("accounts: " + accounts);
-
     }
 
     public void GetTransferAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {

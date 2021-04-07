@@ -43,7 +43,22 @@ public class ATMSSStarter extends AppKickstarter {
         new ATMSSStarter().startApp();
 		String urlPrefix = "http://cslinux0.comp.hkbu.edu.hk/comp4107_20-21_grp06/";
 		BAMSHandler bams = new BAMSHandler(urlPrefix,initLogger());
-
+//		try {
+//			testLogin(bams);
+//			testLogout(bams);
+//			testGetAcc(bams);
+//			testWithdraw(bams);
+//			testDeposit(bams);
+//			testEnquiry(bams);
+//			testTransfer(bams);
+//			testAccStmtReq(bams);
+//			testChqBookReq(bams);
+//			testChgPinReq(bams);
+//		} catch (Exception e) {
+//			System.out.println("TestBAMSHandler: Exception caught: " + e.getMessage());
+//			e.printStackTrace();
+//		}
+//		return;
     } // main
 	static Logger initLogger() {
 		// init our logger
@@ -130,6 +145,13 @@ public class ATMSSStarter extends AppKickstarter {
 		System.out.println("transAmount: " + transAmount);
 		System.out.println();
 	} //testTransfer
+
+	static void testChgPinReq(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+		System.out.println("ChgPinReq:");
+		String result = bams.chgPinReq("123-456-789", "111111", "123456", "cred-1");
+		System.out.println("result: " + result);
+		System.out.println();
+	} // testChgPinReq
 	//------------------------------------------------------------
     // ATMStart
     public ATMSSStarter() {
