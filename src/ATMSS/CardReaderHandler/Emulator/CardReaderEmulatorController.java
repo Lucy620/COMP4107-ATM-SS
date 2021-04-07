@@ -69,6 +69,7 @@ public class CardReaderEmulatorController {
 	        if (cardStatusField.getText().compareTo("Card Ejected") == 0) {
 		    cardReaderTextArea.appendText("Removing card\n");
 		    cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardRemoved, cardNumField.getText()));
+
 		}
 		break;
 

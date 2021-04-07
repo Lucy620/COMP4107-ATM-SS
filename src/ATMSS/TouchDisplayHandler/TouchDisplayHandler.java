@@ -1,6 +1,7 @@
 package ATMSS.TouchDisplayHandler;
 
 import ATMSS.HWHandler.HWHandler;
+import ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulator;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 
@@ -29,6 +30,7 @@ public class TouchDisplayHandler extends HWHandler {
                 handleUpdateDisplay(msg);
                 //atmss.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
                 break;
+
 
             default:
                 log.warning(id + ": unknown message type: [" + msg + "]");

@@ -16,22 +16,22 @@
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
                 <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#TransferClick" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
-                <Label fx:id="a" layoutX="72.0" layoutY="292.0" onMouseClicked="#TransferClickLabel" text="123-4567-890">
+                <Label fx:id="a" layoutX="72.0" layoutY="292.0" onMouseClicked="#TransferClickLabel" text="">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Label fx:id="b" layoutX="412.0" layoutY="292.0" onMouseClicked="#TransferClickLabel" text="123-2345-678">
+                <Label fx:id="b" layoutX="412.0" layoutY="292.0" onMouseClicked="#TransferClickLabel" text="">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Label fx:id="c" layoutX="72.0" layoutY="362.0" onMouseClicked="#TransferClickLabel" text="321-7654-098">
+                <Label fx:id="c" layoutX="72.0" layoutY="362.0" onMouseClicked="#TransferClickLabel" text="">
                     <font>
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Label fx:id="d" layoutX="412.0" layoutY="362.0" onMouseClicked="#TransferClickLabel" text="321-6543-876">
+                <Label fx:id="d" layoutX="412.0" layoutY="362.0" onMouseClicked="#TransferClickLabel" text="">
                     <font>
                         <Font size="24.0" />
                     </font>
@@ -41,7 +41,7 @@
                         <Font size="24.0" />
                     </font>
                 </Label>
-                <Label layoutX="128.0" layoutY="46.0" text="Please Choose Your Accounts:">
+                <Label layoutX="127.0" layoutY="38.0" text="Please Choose Your Accounts:">
                     <font>
                         <Font size="30.0" />
                     </font>
@@ -54,6 +54,11 @@
             <TextField fx:id="account1" layoutX="71.0" layoutY="176.0" />
             <TextField fx:id="account2" layoutX="410.0" layoutY="176.0" />
             <Label layoutX="267.0" layoutY="175.0" text="---------&gt;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="warning" layoutX="172.0" layoutY="105.0" text="" textFill="RED">
                <font>
                   <Font size="24.0" />
                </font>

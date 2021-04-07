@@ -28,15 +28,17 @@ public class TouchDisplayEmulatorController {
     public TextField WithdrawalTextField;
     public TextField account1;
     public TextField account2;
-    public Label a;
+    public Label a; // transfer
     public Label b;
     public Label c;
     public Label d;
-    public Label Account1;
+    public Label warning;
+    public Label Account1; // view
     public Label Account2;
     public Label Account3;
     public Label Account4;
     public Label amountLabel;
+
 
 
     //------------------------------------------------------------
@@ -65,12 +67,7 @@ public class TouchDisplayEmulatorController {
     }
 
     public void TransferField1(String text){
-        if(getAccount1().equals("")) {
-            account1.appendText(text);
-        }else{
-            account1.deleteText(0,getAccount1().length());
-            account1.appendText(text);
-        }
+        account1.appendText(text);
     }
 
     public String getAccount1(){
@@ -80,17 +77,20 @@ public class TouchDisplayEmulatorController {
     public void TransferField2(String text){
         if(getAccount2().equals("")) {
             account2.appendText(text);
+        }else if(account2.getText().equals(account1.getText())) {
+            System.out.println("[][][]" + getAccount1());
         }else{
             account2.deleteText(0,getAccount2().length());
             account2.appendText(text);
         }
     }
 
+
     public String getAccount2(){
         return account2.getText();
     }
 
-    public void EnterNumber(String text){
+    public void EnterNumber(){
         switch (WithdrawalTextField.getStyle()){
             case "Pin":
                 touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "EnterPin"));
@@ -102,6 +102,10 @@ public class TouchDisplayEmulatorController {
 
             case "EnterWithdrawal":
                 touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"EnterWithdrawal"));
+                break;
+
+            case "EnterTransfer":
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"EnterTransfer"));
         }
         //System.out.println(WithdrawalTextField.getText());
     }
@@ -121,7 +125,8 @@ public class TouchDisplayEmulatorController {
         }else if(x <= 300 && y >= 270 && y <= 340){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Deposit"));
         }else if(x <= 300 && y >= 340 && y <= 410){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Transfer"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked,"Transfer"));
+            //touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Transfer"));
         }else if(x >= 340 && y >= 340 && y <= 410){
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"View Balance"));
         }
@@ -143,6 +148,10 @@ public class TouchDisplayEmulatorController {
 
     }
 
+    public void SetTransferAccount(){
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, WithdrawalTextField.getText()));
+    }
+
     public void TransferClick(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
@@ -152,18 +161,49 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
         if (x <= 300 && y >= 270 && y <= 340) {
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "account"+a.getText()));
+            if(SameTransferAccount(a)){
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "account"+a.getText()));
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "account"+a.getText()));
+            }
         }else if(x >= 340 && y >= 270 && y <= 340){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "account"+b.getText()));
+            if(SameTransferAccount(b)){
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "account"+b.getText()));
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "account"+b.getText()));
+            }
         }else if(x <= 300 && y >= 340 && y <= 410){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "account"+c.getText()));
+            if(SameTransferAccount(c)){
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "account"+c.getText()));
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "account"+c.getText()));
+            }
         }else if(x >= 340 && y >= 340 && y <= 410){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "account"+d.getText()));
+            if(SameTransferAccount(d)){
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "account"+d.getText()));
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "account"+d.getText()));
+            }
         }else if(x <= 300 && y >= 410){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
         }else{
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitTransfer"));
+            if(TransferWarning()){
+                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "TransferAmount"));
+            }else{
+
+            }
         }
+    }
+
+    public boolean SameTransferAccount(Label l){
+        if(account1.getText().equals(l.getText())){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean TransferWarning(){
+        if(account1.getText().equals("") || account2.getText().equals("")){
+            warning.setText("Please Choose Two Accounts!");
+            return false;
+        }
+        return true;
     }
 
     public void TransferClickLabel(MouseEvent mouseEvent){
@@ -178,7 +218,7 @@ public class TouchDisplayEmulatorController {
         String selectedText = selectedLabel.getText();
 
         if(selectedText.equals("Submit")){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitTransfer"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "TransferAmount"));
         }else if(selectedText.equals("Back")){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
         }else{
@@ -186,6 +226,31 @@ public class TouchDisplayEmulatorController {
         }
     }
 
+    public void updateTransferLabel(String[] AccountList){
+        a.setText(AccountList[0]);
+        b.setText(AccountList[1]);
+        c.setText(AccountList[2]);
+        d.setText(AccountList[3]);
+    }
+
+    public void finishTransfer(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        if(x <= 300 && y >= 410){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+        }else if(x >= 340 && y >= 410){
+
+        }
+    }
+
+    public void EnterTransfer(){
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EnterTransfer"));
+    }
 
     public void Withdrawal(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();

@@ -29,6 +29,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
     private TouchDisplayEmulatorController touchDisplayEmulatorController;
     public TextField account1;
 	public int AccountCount = 0;
+	public Label warning;
 	public TextField WithdrawalTextField;
 	public String[] AccountList = {"","","",""};
     //------------------------------------------------------------
@@ -75,17 +76,13 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 				account += str.charAt(k);
 			}
 
+			System.out.println(account);
 
 			if (AccountCount == 0) {
 				touchDisplayEmulatorController.TransferField1(account);
 				AccountCount++;
 			} else if (AccountCount == 1) {
-				if (account.equals(touchDisplayEmulatorController.getAccount1())) {
-					touchDisplayEmulatorController.TransferField1(account);
-				} else {
-					touchDisplayEmulatorController.TransferField2(account);
-					AccountCount++;
-				}
+				touchDisplayEmulatorController.TransferField2(account);
 			}
 
 			System.out.println(touchDisplayEmulatorController.getAccount1());
@@ -118,6 +115,41 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 						touchDisplayEmulatorController.updateAccountLabel(AccountList);
 					} catch (Exception e) {
 						log.severe(id + ": failed to load " + "SelectAccount.fxml");
+						e.printStackTrace();
+					}
+				}
+			});
+
+
+		}else if(msg.getDetails().startsWith("transfer")){
+			String str = msg.getDetails();
+			String account = "";
+			for (int k = 8; k < str.length(); k++) {
+				account += str.charAt(k);
+			}
+			System.out.println(account);
+			AccountList = account.split("/");
+			for (int i=0; i<AccountList.length;i++){
+				System.out.println(AccountList[i]);
+			}
+			TouchDisplayEmulator touchDisplayEmulator = this;
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						log.info(id + ": loading fxml: " + "TouchDisplayTransfer.fxml");
+
+						Parent root;
+						FXMLLoader loader = new FXMLLoader();
+						loader.setLocation(TouchDisplayEmulator.class.getResource("TouchDisplayTransfer.fxml"));
+						root = loader.load();
+
+						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
+						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+						myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+						touchDisplayEmulatorController.updateTransferLabel(AccountList);
+					} catch (Exception e) {
+						log.severe(id + ": failed to load " + "TouchDisplayTransfer.fxml");
 						e.printStackTrace();
 					}
 				}
@@ -163,6 +195,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					break;
 
 				case "MainMenu":
+					AccountCount = 0;
 					reloadStage("TouchDisplayMainMenu.fxml");
 					break;
 
@@ -224,7 +257,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					break;
 
 				case "Enter":
-					touchDisplayEmulatorController.EnterNumber(text);
+					touchDisplayEmulatorController.EnterNumber();
 					break;
 
 				case "EnterDeposit":
@@ -234,7 +267,23 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 				case "EnterWithdrawal":
 					String amount = WithdrawalTextField.getText();
 					reloadStage("TouchDisplayWaitWithdrawal.fxml");
+					break;
 
+				case "EnterTransfer":
+					touchDisplayEmulatorController.EnterTransfer();
+					break;
+
+				case "TransferFailed":
+					reloadStage("TransferFailed.fxml");
+					break;
+
+				case "TransferAmount":
+					AccountCount = 0;
+					reloadStage("TransferAmount.fxml");
+					break;
+
+				case "TransferComplete":
+					reloadStage("TransferComplete.fxml");
 					break;
 
 				case "EnterPin":

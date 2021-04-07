@@ -31,7 +31,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="424.0" layoutY="362.0" onMouseClicked="#td_mouseClick2" text="View Balance">
+            <Label  layoutX="424.0" layoutY="362.0" onMouseClicked="#td_mouseClick2" text="View Balance">
                <font>
                   <Font size="24.0" />
                </font>
