@@ -156,7 +156,14 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			});
 
 
-		}else if(msg.getDetails().startsWith("amount")){
+		}else if(msg.getDetails().startsWith("TransferAdvice")){
+			String str = msg.getDetails();
+			String TransferAdvice = "";
+			for(int i = 14; i < str.length(); i++){
+				TransferAdvice += str.charAt(i);
+			}
+			touchDisplayEmulatorController.updateTransferAmount(TransferAdvice);
+		} else if(msg.getDetails().startsWith("amount")){
 			String str = msg.getDetails();
 			String amount = "";
 			for (int k = 6; k < str.length(); k++) {

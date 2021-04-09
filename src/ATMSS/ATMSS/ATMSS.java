@@ -197,7 +197,7 @@ public class ATMSS extends AppThread {
     //------------------------------------------------------------
     // processMouseClicked
     private void processMouseClicked(Msg msg) throws IOException, BAMSInvalidReplyException {
-        if (msg.getDetails().compareToIgnoreCase("EjectCard") == 0) {
+        if (msg.getDetails().compareToIgnoreCase("Eject Card") == 0) {
             cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
         } else if (msg.getDetails().compareToIgnoreCase("PrintAdvice") == 0) {
             cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
@@ -238,6 +238,7 @@ public class ATMSS extends AppThread {
         }else if(msg.getDetails().startsWith("action")){
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
         }else if(msg.getDetails().startsWith("amount")){
+            System.out.println("????"+msg.getDetails());
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
         }
 
@@ -297,6 +298,7 @@ public class ATMSS extends AppThread {
             fromAcc="";
             toAcc="";
         }else{
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"TransferAdvice" + textField));
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"TransferComplete"));
             fromAcc="";
             toAcc="";

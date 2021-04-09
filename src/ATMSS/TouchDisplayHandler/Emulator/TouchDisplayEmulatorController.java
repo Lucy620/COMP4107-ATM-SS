@@ -262,9 +262,9 @@ public class TouchDisplayEmulatorController {
         }else if(x >= 340 && y >= 410){
             EjectCard(mouseEvent);
         }else if(x <= 300 && y >= 340 && y <= 410){
-            AdviceOnly(mouseEvent);
+            TransferAdviceOnly(mouseEvent);
         }else if( x >= 340 && y >= 340 && y <= 410){
-            EjectCardandAdvice(mouseEvent);
+            TransferEjectCardandAdvice(mouseEvent);
         }
     }
 
@@ -291,6 +291,21 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdviceOnly"));
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+    }
+
+    public void TransferAdviceOnly(MouseEvent mouseEvent){
+        System.out.println("!!!!"+amount);
+        AdviceOnly(mouseEvent);
+        //touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
+
+        //amount="";
+        //touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"TransferAdvice"));
+    }
+
+    public void TransferEjectCardandAdvice(MouseEvent mouseEvent){
+        //touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
+        EjectCardandAdvice(mouseEvent);
+        amount="";
     }
 
     public void InvalidPin(){
@@ -463,14 +478,18 @@ public class TouchDisplayEmulatorController {
 
     }
     public void updateAmount(String amount_back) {
-
         amountLabel.setText("Account Balance: "+amount_back);
         amount=amount_back;
         touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
         amount="";
-
     }
 
+    public void updateTransferAmount(String amount_back){
+        amount = amount_back;
+        System.out.println("::::" + amount);
+        touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
+        amount="";
+    }
 
 
 } // TouchDisplayEmulatorController

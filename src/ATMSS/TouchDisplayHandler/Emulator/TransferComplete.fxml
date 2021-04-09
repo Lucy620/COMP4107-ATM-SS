@@ -30,12 +30,12 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="65.0" layoutY="362.0" onMouseClicked="#AdviceOnly" text="Print Advice Only">
+            <Label layoutX="65.0" layoutY="362.0" onMouseClicked="#TransferAdviceOnly" text="Print Advice Only">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="355.0" layoutY="362.0" onMouseClicked="#EjectCardandAdvice" text="Print Advice and Eject Card">
+            <Label layoutX="355.0" layoutY="362.0" onMouseClicked="#TransferEjectCardandAdvice" text="Print Advice and Eject Card">
                <font>
                   <Font size="24.0" />
                </font>

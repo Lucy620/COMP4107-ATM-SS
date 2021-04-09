@@ -73,6 +73,8 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
                             myStage.setScene(new Scene(root, WIDTH, HEIGHT));
                             advicePrinterEmulatorController.updateActionLabel(action);
                             advicePrinterEmulatorController.updateAmountLabel(amount);
+                            action = "";
+                            amount = "";
                         } catch (Exception e) {
                             log.severe(id + ": failed to load " + "AdvicePrinterEmulator.fxml");
                             e.printStackTrace();
@@ -103,6 +105,7 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
             for (int k = 6; k < str.length(); k++) {
                 amount += str.charAt(k);
             }
+
             //advicePrinterEmulatorController.updateAmountLabel(amount);
         }
     }
