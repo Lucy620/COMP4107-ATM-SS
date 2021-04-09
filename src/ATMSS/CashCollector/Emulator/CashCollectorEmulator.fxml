@@ -8,30 +8,47 @@
             prefWidth="483.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ATMSS.CashCollector.Emulator.CashCollectorEmulatorController">
     <children>
-        <Button layoutX="50.0" layoutY="200.0" mnemonicParsing="false" text="100" textAlignment="CENTER">
+        <Button layoutX="50.0" layoutY="200.0" fx:id="Banknote100" onAction="#depAmount" text="100">
             <font>
                 <Font size="24.0"/>
             </font>
         </Button>
-        <Button layoutX="200.0" layoutY="200.0" mnemonicParsing="false" text="500" textAlignment="CENTER">
+        <Button layoutX="200.0" layoutY="200.0" fx:id="Banknote500" onAction="#depAmount" text="500">
             <font>
                 <Font size="24.0"/>
             </font>
         </Button>
-        <Button layoutX="350.0" layoutY="200.0" mnemonicParsing="false" text="1000" textAlignment="CENTER">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Button>
-        <Button layoutX="190.0" layoutY="350.0" onAction="#buttonPressed" text="Insert" textAlignment="CENTER">
+        <Button layoutX="350.0" layoutY="200.0" fx:id="Banknote1000" onAction="#depAmount" text="1000">
             <font>
                 <Font size="24.0"/>
             </font>
         </Button>
-        <Label layoutX="60.0" layoutY="50.0" prefHeight="54.0" prefWidth="379.0" text="Cash Amount:             HKD" textAlignment="CENTER">
+        <Button layoutX="190.0" layoutY="350.0" onAction="#buttonPressed" text="Insert">
             <font>
-                <Font size="32.0" />
+                <Font size="24.0"/>
+            </font>
+        </Button>
+        <Label layoutX="60.0" layoutY="50.0" prefHeight="54.0" prefWidth="379.0" text="Cash Number:">
+            <font>
+                <Font size="32.0"/>
             </font>
         </Label>
+
+        <Label layoutX="70.0" layoutY="120.0" fx:id="banknote100num" prefHeight="54.0" prefWidth="379.0" text="">
+            <font>
+                <Font size="32.0"/>
+            </font>
+        </Label>
+        <Label layoutX="220.0" layoutY="120.0" fx:id="banknote500num" prefHeight="54.0" prefWidth="379.0" text="">
+            <font>
+                <Font size="32.0"/>
+            </font>
+        </Label>
+        <Label layoutX="370.0" layoutY="120.0" fx:id="banknote1000num" prefHeight="54.0" prefWidth="379.0" text="">
+            <font>
+                <Font size="32.0"/>
+            </font>
+        </Label>
+
     </children>
 </AnchorPane>

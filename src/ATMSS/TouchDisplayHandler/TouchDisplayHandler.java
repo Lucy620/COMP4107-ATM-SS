@@ -41,6 +41,7 @@ public class TouchDisplayHandler extends HWHandler {
     //------------------------------------------------------------
     // handleUpdateDisplay
     protected void handleUpdateDisplay(Msg msg) {
-	log.info(id + ": update display -- " + msg.getDetails());
-    } // handleUpdateDisplay
+        log.info(id + ": update display -- " + msg.getDetails());
+    }
+    // handleUpdateDisplay
 } // TouchDisplayHandler

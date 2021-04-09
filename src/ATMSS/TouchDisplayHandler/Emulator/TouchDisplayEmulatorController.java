@@ -42,15 +42,31 @@ public class TouchDisplayEmulatorController {
 
     public String action;
     public String amount;
+    public Label num100;
+    public Label num500;
+    public Label num1000;
+    public Label amount100;
+    public Label amount500;
+    public Label amount1000;
+    public Label totalAmount;
+    public Label Account;
+    public Label depositAmount;
+    public Label depositAccount;
+    public Label ejectBalance;
+    public int total100;
+    public int total500;
+    public int total1000;
+    public int total;
+
 
     //------------------------------------------------------------
     // initialize
     public void initialize(String id, AppKickstarter appKickstarter, Logger log, TouchDisplayEmulator touchDisplayEmulator) {
         this.id = id;
-	this.appKickstarter = appKickstarter;
-	this.log = log;
-	this.touchDisplayEmulator = touchDisplayEmulator;
-	this.touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
+        this.appKickstarter = appKickstarter;
+        this.log = log;
+        this.touchDisplayEmulator = touchDisplayEmulator;
+        this.touchDisplayMBox = appKickstarter.getThread("TouchDisplayHandler").getMBox();
     } // initialize
 
     public void AppendTextField(String status){
@@ -134,8 +150,8 @@ public class TouchDisplayEmulatorController {
         }else if(x <= 300 && y >= 270 && y <= 340){
             action="Deposit";
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
-            action="";
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Deposit"));
+            action = "";
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Deposit"));
         }else if(x <= 300 && y >= 340 && y <= 410){
             action="Transfer";
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
@@ -162,7 +178,7 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
         action="";
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, selectedText));
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
+        //touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
 
     }
 
@@ -355,20 +371,59 @@ public class TouchDisplayEmulatorController {
 
         if (x <= 300 && y >= 410) {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "CollectorOpen"));
-        } else if (x >= 340 && y >= 340 && y <= 410) {
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "DepositConfirmation"));
+        } else if (x >= 340 && y >= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "totalAmount" + String.valueOf(total)));
         }
     }
 
-    public void CashCollectorOpenLabel(MouseEvent mouseEvent){
+    public void CashCollectorOpenLabel(MouseEvent mouseEvent) {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "CollectorOpen"));
     }
 
-    public void DepositConfirmationLabel(MouseEvent mouseEvent){
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "DepositConfirmation"));
+    public void DepositConfirmationLabel(MouseEvent mouseEvent) {
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "totalAmount" + String.valueOf(total)));
     }
 
-    public void BackToMenu(MouseEvent mouseEvent){
+    public void DepositViewBalance(MouseEvent mouseEvent) {
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        if (x <= 300 && y >= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectBalance"));
+        } else if (x >= 340 && y >= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        }
+
+    }
+
+    public void selectDeposit_mouseClick(MouseEvent mouseEvent) {
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        if (x <= 300 && y >= 270 && y <= 340) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DepositAccount" + Account1.getText()));
+        } else if (x >= 340 && y >= 270 && y <= 340) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DepositAccount" + Account2.getText()));
+        } else if (x <= 300 && y >= 340 && y <= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DepositAccount" + Account3.getText()));
+        } else if (x >= 340 && y >= 340 && y <= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DepositAccount" + Account4.getText()));
+        }
+    }
+
+    public void selectDeposit_mouseClickLabel(MouseEvent mouseEvent) {
+        Label selectedLabel = ((Label) mouseEvent.getSource());
+        String selectedText = selectedLabel.getText();
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DepositAccount" + selectedText));
+    }
+
+    public void BackToMenu(MouseEvent mouseEvent) {
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
 
@@ -388,6 +443,7 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WithdrawalEnterAmount"));
     }
+
     public void PickAction(MouseEvent mouseEvent) {
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
@@ -397,10 +453,10 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
         if (x <= 300 && y >= 270 && y <= 340) {
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
         }else if(x >= 340 && y >= 270 && y <= 340){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
         }else if(x <= 300 && y >= 340 && y <= 410){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
         }
@@ -408,7 +464,8 @@ public class TouchDisplayEmulatorController {
 
     public void EjectCard(MouseEvent mouseEvent){
 
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
     }
 
     public void EjectCardandBalance(MouseEvent mouseEvent){
@@ -419,7 +476,7 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "EjectBalance"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectBalance"));
 
     }
 
@@ -430,7 +487,7 @@ public class TouchDisplayEmulatorController {
         log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
     }
 
@@ -482,20 +539,64 @@ public class TouchDisplayEmulatorController {
     public void updateAmount(String amount_back) {
         amountLabel.setText("Account Balance: "+amount_back);
         amount=amount_back;
-        touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
-        amount="";
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "amount" + amount));
+        amount = "";
     }
 
-    public void updateTransferAmount(String amount_back){
+    public void updateTransferAmount(String amount_back) {
         amount = amount_back;
         System.out.println("::::" + amount);
-        touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
-        amount="";
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "amount" + amount));
+        amount = "";
     }
 
+    public void updateDepositAccount(String[] AccountList) {
+        Account1.setText(AccountList[0]);
+        Account2.setText(AccountList[1]);
+        Account3.setText(AccountList[2]);
+        Account4.setText(AccountList[3]);
+    }
+
+
+    public void handleUpdateDisplay_ShowCashDetail(String str) {
+        String cashNum = "";
+        for (int k = 17; k < str.length(); k++) {
+            cashNum += str.charAt(k);
+        }
+        String[] CashDetail = {"", "", ""};
+        CashDetail = cashNum.split("/");
+        total100 += Integer.parseInt(CashDetail[0]) * 100;
+        total500 += Integer.parseInt(CashDetail[1]) * 500;
+        total1000 += Integer.parseInt(CashDetail[2]) * 1000;
+        total = total + total100 + total500 + total1000;
+
+        num100.setText(CashDetail[0]);
+        num500.setText(CashDetail[1]);
+        num1000.setText(CashDetail[2]);
+
+        amount100.setText(String.valueOf(total100));
+        amount500.setText(String.valueOf(total500));
+        amount1000.setText(String.valueOf(total1000));
+        totalAmount.setText(String.valueOf(total));
+    }
     public void ClearText(){
         WithdrawalTextField.clear();
     }
 
 
+    public void UpdateDepositViewBalance(String accno, String amount_back) {
+        depositAccount.setText(accno);
+        depositAmount.setText(amount_back);
+        amount = amount_back;
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "amount" + amount));
+        amount = "";
+    }
+
+    public void DepositEjectBalance(String balance) {
+        ejectBalance.setText(balance);
+    }
+
+    public void UpdateDepositAccount(String acc) {
+        Account.setText(acc);
+    }
 } // TouchDisplayEmulatorController

@@ -63,6 +63,10 @@ public class CashCollectorEmulator extends CashCollectorHandler {
             case "Open":
                 reloadStage("CashCollectorEmulator.fxml");
                 break;
+
+            case "CashInsert":
+                reloadStage("CashCollectorEmulator.fxml");
+                break;
         }
     } // handleUpdateDisplay
 

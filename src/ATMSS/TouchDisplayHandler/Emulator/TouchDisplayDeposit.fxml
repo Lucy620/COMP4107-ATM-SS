@@ -8,55 +8,110 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
     <AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE"
+                       width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0"/>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="72.0" layoutX="339.0" layoutY="409.0"
                        stroke="BLACK" strokeType="OUTSIDE" width="302.0"/>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#CashCollectorOpen" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0"
+                       onMouseClicked="#CashCollectorOpen" stroke="BLACK" strokeType="OUTSIDE" width="640"
+                       AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"/>
 
             <Label layoutX="96.0" layoutY="14.0" text="You have deposited the following amount:">
                 <font>
-                    <Font size="24.0" />
+                    <Font size="24.0"/>
                 </font>
             </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16b52b" height="107.0" layoutY="62.0" stroke="BLACK" strokeType="INSIDE" width="642.0" />
-            <Label layoutX="119.0" layoutY="79.0" text="Deposit account number:">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16b52b" height="65.0" layoutY="62.0" stroke="BLACK"
+                       strokeType="INSIDE" width="642.0"/>
+
+            <Label fx:id="Account" layoutX="338.0" layoutY="79.0" prefHeight="27.0" prefWidth="188.0" text="">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="18.0"/>
                 </font>
             </Label>
-            <Label layoutX="138.0" layoutY="124.0" text="Deposit account name:">
+
+            <Label layoutX="189.0" layoutY="144.0" text="The number of banknotes deposited:">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="16.0"/>
                 </font>
             </Label>
-            <Label layoutX="191.0" layoutY="180.0" text="The number of banknotes deposited:">
+            <Label layoutX="165.0" layoutY="180.0" text="100 HKD     X ">
                 <font>
-                    <Font size="16.0" />
+                    <Font size="18.0"/>
                 </font>
             </Label>
-            <Label layoutX="165.0" layoutY="213.0" text="100 HKD     X     100num = 100amount">
+            <Label fx:id="num100" layoutX="300.0" layoutY="180.0" text="0">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="18.0"/>
                 </font>
             </Label>
-            <Label layoutX="165.0" layoutY="250.0" text="500 HKD     X     500num = 500amount">
+            <Label layoutX="375.0" layoutY="180.0" text="=">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="18.0"/>
                 </font>
             </Label>
-            <Label layoutX="148.0" layoutY="288.0" text="1000 HKD      X     1000num = 1000amount">
+            <Label fx:id="amount100" layoutX="400.0" layoutY="180.0" text="0">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="18.0"/>
                 </font>
             </Label>
-            <Label layoutX="302.0" layoutY="329.0" text="Total amount: totalAmount">
+
+            <Label layoutX="165.0" layoutY="220.0" text="500 HKD     X ">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="18.0"/>
                 </font>
             </Label>
+            <Label fx:id="num500" layoutX="300.0" layoutY="220.0" text="0">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <Label layoutX="375.0" layoutY="220.0" text="=">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <Label fx:id="amount500" layoutX="400.0" layoutY="220.0" text="0">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+
+            <Label layoutX="151.0" layoutY="260.0" text="1000 HKD      X ">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <Label fx:id="num1000" layoutX="300.0" layoutY="260.0" text="0">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <Label layoutX="375.0" layoutY="260.0" text="=">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <Label fx:id="amount1000" layoutX="400.0" layoutY="260.0" text="0">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+
+            <Label layoutX="320.0" layoutY="310.0" text="Total amount:">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+            <Label fx:id="totalAmount" layoutX="440.0" layoutY="310.0" prefHeight="27.0" prefWidth="110.0" text="0">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Label>
+
             <Label layoutX="271.0" layoutY="367.0" text="Please select">
                 <font>
-                    <Font size="18.0" />
+                    <Font size="18.0"/>
                 </font>
             </Label>
             <Label layoutX="61.0" layoutY="428.0" onMouseClicked="#CashCollectorOpenLabel" text="Reentry banknotes">
