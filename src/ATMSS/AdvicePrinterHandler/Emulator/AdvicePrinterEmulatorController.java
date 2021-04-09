@@ -19,6 +19,8 @@ public class AdvicePrinterEmulatorController {
     private Logger log;
     private AdvicePrinterEmulator advicePrinterEmulator;
     private MBox advicePrinterMBox;
+    public Label actionLabel;
+    public Label amountLabel;
 
     //------------------------------------------------------------
     // initialize
@@ -34,6 +36,14 @@ public class AdvicePrinterEmulatorController {
     // buttonPressed
     public void buttonPressed(ActionEvent actionEvent) {
         advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.CR_EjectCard, "Waiting"));
+    } // buttonPressed
+
+    public void updateActionLabel(String action) {
+        actionLabel.setText("Action: "+action);
+    } // buttonPressed
+
+    public void updateAmountLabel(String amount) {
+        amountLabel.setText("Amount: "+amount);
     } // buttonPressed
 
 

@@ -28,7 +28,7 @@ public class TouchDisplayEmulatorController {
     public TextField WithdrawalTextField;
     public TextField account1;
     public TextField account2;
-    public Label a; // transfer
+    public Label a;
     public Label b;
     public Label c;
     public Label d;
@@ -40,7 +40,8 @@ public class TouchDisplayEmulatorController {
     public Label amountLabel;
     public Label errorPin; //change pin
 
-
+    public String action;
+    public String amount;
 
     //------------------------------------------------------------
     // initialize
@@ -86,7 +87,6 @@ public class TouchDisplayEmulatorController {
         }
     }
 
-
     public String getAccount2(){
         return account2.getText();
     }
@@ -125,13 +125,24 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
         if (x >= 340 && y >= 270 && y <= 340) {
+            action="Withdrawal";
+            touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
+            action="";
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Withdrawal"));
         }else if(x <= 300 && y >= 270 && y <= 340){
+            action="Deposit";
+            touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
+            action="";
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Deposit"));
         }else if(x <= 300 && y >= 340 && y <= 410){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked,"Transfer"));
-            //touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Transfer"));
+            action="Transfer";
+            touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
+            action="";
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Transfer"));
         }else if(x >= 340 && y >= 340 && y <= 410){
+            action="View Balance";
+            touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
+            action="";
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"View Balance"));
         }else if(x >= 340 && y>=410 && y<=480){
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"Eject Card"));
@@ -145,6 +156,9 @@ public class TouchDisplayEmulatorController {
         Label selectedLabel = ((Label) mouseEvent.getSource());
         String selectedText = selectedLabel.getText();
         //System.out.println(selectedText);
+        action = selectedText;
+        touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
+        action="";
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, selectedText));
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
 
@@ -375,7 +389,6 @@ public class TouchDisplayEmulatorController {
         }
     }// SelectAccount_rectangle
 
-
     public void EjectCard(MouseEvent mouseEvent){
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
@@ -400,7 +413,7 @@ public class TouchDisplayEmulatorController {
         log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
-
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
     }
 
@@ -449,8 +462,13 @@ public class TouchDisplayEmulatorController {
         Account4.setText(AccountList[3]);
 
     }
-    public void updateAmount(String amount) {
-        amountLabel.setText("Account Balance: "+amount);
+    public void updateAmount(String amount_back) {
+
+        amountLabel.setText("Account Balance: "+amount_back);
+        amount=amount_back;
+        touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
+        amount="";
+
     }
 
 

@@ -23,6 +23,7 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
     private Stage myStage;
     private AdvicePrinterEmulatorController advicePrinterEmulatorController;
     private String action ="";
+    private String amount="";
 
     public AdvicePrinterEmulator(String id, ATMSSStarter atmssStarter) {
         super(id, atmssStarter);
@@ -55,7 +56,30 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
 
         switch (msg.getDetails()) {
             case "Printing":
-                reloadStage("AdvicePrinterEmulator.fxml");
+                AdvicePrinterEmulator advicePrinterEmulator = this;
+
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            log.info(id + ": loading fxml: " + "AdvicePrinterEmulator.fxml");
+
+                            Parent root;
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(AdvicePrinterEmulator.class.getResource("AdvicePrinterEmulator.fxml"));
+                            root = loader.load();
+                            advicePrinterEmulatorController = (AdvicePrinterEmulatorController) loader.getController();
+                            advicePrinterEmulatorController.initialize(id, atmssStarter, log, advicePrinterEmulator);
+                            myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+                            advicePrinterEmulatorController.updateActionLabel(action);
+                            advicePrinterEmulatorController.updateAmountLabel(amount);
+                        } catch (Exception e) {
+                            log.severe(id + ": failed to load " + "AdvicePrinterEmulator.fxml");
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
                 break;
 
             case "Waiting":
@@ -63,6 +87,23 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
                 break;
 
 
+        }
+    }
+
+    protected void handleUpdateLabel(Msg msg) {
+        if(msg.getDetails().startsWith("action")){
+            String str = msg.getDetails();
+            for (int k = 6; k < str.length(); k++) {
+                action += str.charAt(k);
+            }
+            //advicePrinterEmulatorController.updateActionLabel(action);
+        }else if(msg.getDetails().startsWith("amount")){
+            String str = msg.getDetails();
+
+            for (int k = 6; k < str.length(); k++) {
+                amount += str.charAt(k);
+            }
+            //advicePrinterEmulatorController.updateAmountLabel(amount);
         }
     }
 

@@ -96,7 +96,6 @@ public class ATMSS extends AppThread {
 
                 case CR_CardInserted:
                     log.info("MouseCLicked: " + msg.getDetails());
-                    //status=""
                     cardNo=msg.getDetails();
                     cardReaderInsertPressed(msg);
                     break;
@@ -236,6 +235,10 @@ public class ATMSS extends AppThread {
             CardReaderEmpty=false;
         }else if(msg.getDetails().compareToIgnoreCase("Change Password") == 0){
             ChangePassword(bams);
+        }else if(msg.getDetails().startsWith("action")){
+            advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
+        }else if(msg.getDetails().startsWith("amount")){
+            advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
         }
 
 	} // processMouseClicked
