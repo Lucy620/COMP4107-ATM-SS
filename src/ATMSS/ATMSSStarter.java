@@ -57,7 +57,6 @@ public class ATMSSStarter extends AppKickstarter {
 		return log;
 	} // initLogger
 
-
 	static class LogFormatter extends Formatter {
 		//------------------------------------------------------------
 		// format
