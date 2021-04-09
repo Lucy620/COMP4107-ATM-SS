@@ -32,7 +32,12 @@ public class CardReaderHandler extends HWHandler {
                 break;
 
             case CR_CardRemoved:
+                atmss.send(new Msg(id, mbox, Msg.Type.CR_CardRemoved,msg.getDetails()));
                 handleCardRemove();
+                break;
+
+            case TimesUp:
+                handleCardRetain();
                 break;
 
             default:
@@ -54,13 +59,18 @@ public class CardReaderHandler extends HWHandler {
     protected void handleCardEject() {
         atmss.send(new Msg(id, cardReaderMBox, Msg.Type.TD_MouseClicked, "BlankScreen"));
         log.info(id + ": card ejected");
+
     } // handleCardEject
+
+    protected void handleCardRetain(){
+        log.info(id + ": card retained");
+    }
 
 
     //------------------------------------------------------------
     // handleCardRemove
     protected void handleCardRemove() {
-        atmss.send(new Msg(id, cardReaderMBox, Msg.Type.TD_MouseClicked, "CardRemoved"));
+        //atmss.send(new Msg(id, cardReaderMBox, Msg.Type.TD_MouseClicked, "CardRemoved"));
         log.info(id + ": card removed");
     } // handleCardRemove
 } // CardReaderHandler

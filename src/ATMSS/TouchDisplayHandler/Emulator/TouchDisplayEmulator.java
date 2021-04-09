@@ -205,10 +205,6 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					reloadStage("TouchDisplayMainMenu.fxml");
 					break;
 
-				case "Confirmation":
-					reloadStage("TouchDisplayConfirmation.fxml");
-					break;
-
 				case "DepositConfirmation":
 					reloadStage("TouchDisplayDepositViewBalance.fxml");
 					break;
@@ -240,6 +236,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 
 				case "PasswordConfirm":
 					reloadStage("TouchDisplayConfirmPin.fxml");
+					//touchDisplayEmulatorController.ClearText();
 					break;
 
 				case "Account 1":

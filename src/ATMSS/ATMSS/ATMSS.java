@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.logging.*;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.scene.control.TextField;
 
 import AppKickstarter.AppKickstarter;
@@ -37,6 +38,7 @@ public class ATMSS extends AppThread {
     private String amount = "";
     private int transferCount = 0;
     private MBox cashCollectorMBox;
+    private int pinCount = 0;
 
     private String oldPin = "";
     private String newPin = "";
@@ -100,12 +102,26 @@ public class ATMSS extends AppThread {
                     cardReaderInsertPressed(msg);
                     break;
 
+                case CR_CardRemoved:
+                    log.info("Card: " + msg.getDetails() + "removed");
+                    try{
+                        CardRemove(bams,msg);
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }catch (BAMSInvalidReplyException e){
+                        e.printStackTrace();
+                    }
+                    break;
+
+
                 case TimesUp:
                     Timer.setTimer(id, mbox, pollingTime);
                     log.info("Poll: " + msg.getDetails());
-                    cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-                    keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-                    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+                    CardRetain();
+                    //cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+                    //keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+                    //touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+                    //cashCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll,""));
                     break;
 
                 case PollAck:
@@ -229,10 +245,6 @@ public class ATMSS extends AppThread {
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "BlankScreen"));
         }else if(msg.getDetails().compareToIgnoreCase("Transfer") == 0) {
             GetTransferAcc(bams);
-        }else if(msg.getDetails().compareToIgnoreCase("CardRemoved") == 0){
-            CardReaderEmpty=true;
-        }else if(msg.getDetails().compareToIgnoreCase("CardInserted") == 0){
-            CardReaderEmpty=false;
         }else if(msg.getDetails().compareToIgnoreCase("Change Password") == 0){
             ChangePassword(bams);
         }else if(msg.getDetails().startsWith("action")){
@@ -249,19 +261,30 @@ public class ATMSS extends AppThread {
     }
 
     private void cardValidation(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
-        System.out.println("Login:");
-        try {
-            String cred = bams.login(cardNo, textField);
-            System.out.println("cred: " + cred);
-            if(cred.equals("Success Login")){
-                login=true;
-                oldPin = textField;
-                touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+
+        if(pinCount ==  2){
+            CardRetain();
+            pinCount = 0;
+        }else{
+            try {
+                System.out.println("Login:");
+                String cred = bams.login(cardNo, textField);
+                System.out.println("cred: " + cred);
+                if(cred.equals("Success Login")){
+                    login=true;
+                    oldPin = textField;
+                    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+                }else{
+                    pinCount++;
+                    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "PasswordConfirm"));
+                    clearTextFiled();
+                }
+                textField="";
+            } catch (Exception e) {
+                System.out.println("TestBAMSHandler: " + e.getMessage());
             }
-            textField="";
-        } catch (Exception e) {
-            System.out.println("TestBAMSHandler: " + e.getMessage());
         }
+
     }
 
     private void ChangePassword(BAMSHandler bams) throws BAMSInvalidReplyException, IOException{
@@ -348,5 +371,21 @@ public class ATMSS extends AppThread {
 
     private void cardReaderInsertPressed(Msg msg) {
         touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "PasswordConfirm"));
+    }
+
+    public void CardRetain(){
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox,Msg.Type.TD_UpdateDisplay,"BlankScreen"));
+        //advicePrinterMBox.send(new Msg(id, advicePrinterMBox,Msg.Type.TD_MouseClicked,"actionRetain card"));
+        advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.CR_EjectCard, "CardRetain"));
+        cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.TimesUp, "Retain"));
+        cashCollectorMBox.send(new Msg(id, cardReaderMBox, Msg.Type.TD_UpdateDisplay, "Waiting"));
+        cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.TD_UpdateDisplay, "Waiting"));
+    }
+
+    public void CardRemove(BAMSHandler bams, Msg msg) throws IOException, BAMSInvalidReplyException {
+        login = false;
+        String cred = bams.logout(msg.getDetails(),"cred-1");
+        System.out.println("cred: " + cred);
+
     }
 } // CardReaderHandler

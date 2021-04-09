@@ -88,8 +88,38 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
                 reloadStage("AdvicePrinterDefault.fxml");
                 break;
 
+            case "CardRetain":
+                AdvicePrinterEmulator advicePrinterEmulator2 = this;
 
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            log.info(id + ": loading fxml: " + "AdvicePrinterEmulator.fxml");
+
+                            Parent root;
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(AdvicePrinterEmulator.class.getResource("AdvicePrinterEmulator.fxml"));
+                            root = loader.load();
+                            advicePrinterEmulatorController = (AdvicePrinterEmulatorController) loader.getController();
+                            advicePrinterEmulatorController.initialize(id, atmssStarter, log, advicePrinterEmulator2);
+                            myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+                            advicePrinterEmulatorController.updateCardRetain();
+                            action = "";
+                        } catch (Exception e) {
+                            log.severe(id + ": failed to load " + "AdvicePrinterEmulator.fxml");
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                break;
         }
+    }
+
+    protected void cardRetain(Msg msg){
+        handleUpdateLabel(msg);
+        handleUpdateDisplay(new Msg(id,mbox,Msg.Type.TD_UpdateDisplay,"Printing"));
+        advicePrinterEmulatorController.updateCardRetain();
     }
 
     protected void handleUpdateLabel(Msg msg) {

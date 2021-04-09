@@ -110,6 +110,8 @@ public class TouchDisplayEmulatorController {
             case "EnterTransfer":
                 touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"EnterTransfer"));
 
+            default:
+                log.info(id + "KeyPressed: Enter");
         }
         //System.out.println(WithdrawalTextField.getText());
     }
@@ -489,6 +491,10 @@ public class TouchDisplayEmulatorController {
         System.out.println("::::" + amount);
         touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
         amount="";
+    }
+
+    public void ClearText(){
+        WithdrawalTextField.clear();
     }
 
 

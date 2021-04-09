@@ -23,7 +23,7 @@ public class CardReaderEmulatorController {
     public TextField cardStatusField;
     public TextArea cardReaderTextArea;
     public boolean CardInsert = true;
-
+    private int insertcnt = 0;
 
     //------------------------------------------------------------
     // initialize
@@ -59,21 +59,27 @@ public class CardReaderEmulatorController {
 		break;
 
 	    case "Insert Card":
-		if (cardNumField.getText().length() != 0 && CardInsert)  {
+		if (cardNumField.getText().length() != 0 && CardInsert && insertcnt == 0)  {
 			CardInsert = false;
+			insertcnt = 1;
 		    cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardInserted, cardNumField.getText()));
 		    cardReaderTextArea.appendText("Sending " + cardNumField.getText()+"\n");
 		    cardStatusField.setText("Card Inserted");
+		}else if(!CardInsert && insertcnt == 1){
+			cardReaderTextArea.appendText("Please remove card first!" + "\n");
 		}
+
 		break;
 
 	    case "Remove Card":
-	        if (cardStatusField.getText().compareTo("Card Ejected") == 0 && !CardInsert) {
+	        if (cardStatusField.getText().compareTo("Card Ejected") == 0 && !CardInsert && insertcnt == 1) {
 	        	CardInsert = true;
+	        	insertcnt = 0;
 		        cardReaderTextArea.appendText("Removing card\n");
 		    	cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardRemoved, cardNumField.getText()));
-
-		}
+	        }else if(CardInsert){
+	        	cardReaderTextArea.appendText("No card to remove!" + "\n");
+			}
 		break;
 
 	    default:
@@ -89,10 +95,14 @@ public class CardReaderEmulatorController {
 	cardStatusField.setText(status);
     } // updateCardStatus
 
-
     //------------------------------------------------------------
     // appendTextArea
     public void appendTextArea(String status) {
 	cardReaderTextArea.appendText(status+"\n");
     } // appendTextArea
+
+	public void clear(){
+		insertcnt = 0;
+		CardInsert = true;
+	}
 } // CardReaderEmulatorController

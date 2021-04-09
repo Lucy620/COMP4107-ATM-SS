@@ -8,7 +8,6 @@ import AppKickstarter.misc.*;
 // HWHandler
 public class HWHandler extends AppThread {
     protected MBox atmss = null;
-
     //------------------------------------------------------------
     // HWHandler
     public HWHandler(String id, AppKickstarter appKickstarter) {
@@ -36,6 +35,10 @@ public class HWHandler extends AppThread {
                     quit = true;
                     break;
 
+                case TimesUp:
+                    //atmss.send(new Msg(id, mbox, Msg.Type.TimesUp, "CardRetain"));
+                    break;
+
                 default:
                     processMsg(msg);
             }
@@ -44,6 +47,7 @@ public class HWHandler extends AppThread {
         // declaring our departure
         appKickstarter.unregThread(this);
         log.info(id + ": terminating...");
+
     } // run
 
 

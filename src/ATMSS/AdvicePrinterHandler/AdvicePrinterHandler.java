@@ -24,6 +24,10 @@ public class AdvicePrinterHandler extends HWHandler{
                 handleUpdateLabel(msg);
                 break;
 
+            case TimesUp:
+                cardRetain(msg);
+                break;
+
             default:
                 log.warning(id + ": unknown message type: [" + msg + "]");
         }
@@ -37,5 +41,7 @@ public class AdvicePrinterHandler extends HWHandler{
         log.info(id + ": update display -- " + msg.getDetails());
     } // handleUpdateLabel
 
-
+    protected void cardRetain(Msg msg){
+        log.info(id + ": card retained!");
+    }
 }
