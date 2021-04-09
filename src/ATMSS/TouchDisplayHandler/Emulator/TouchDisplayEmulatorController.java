@@ -395,10 +395,10 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
         if (x <= 300 && y >= 270 && y <= 340) {
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
         }else if(x >= 340 && y >= 270 && y <= 340){
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
         }else if(x <= 300 && y >= 340 && y <= 410){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
         }
@@ -406,7 +406,7 @@ public class TouchDisplayEmulatorController {
 
     public void EjectCard(MouseEvent mouseEvent){
 
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
     }
 
     public void EjectCardandBalance(MouseEvent mouseEvent){
@@ -428,7 +428,7 @@ public class TouchDisplayEmulatorController {
         log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
     }
 
