@@ -85,15 +85,46 @@ public class Msg {
 	/** Set a timer */			SetTimer,
 	/** Set a timer */			CancelTimer,
 	/** Timer clock ticks */		Tick,
-	/** Time's up for the timer */		TimesUp,
-	/** Health poll */			Poll,
-	/** Health poll acknowledgement */	PollAck,
-	/** Update Display */			TD_UpdateDisplay,
-	/** Mouse Clicked */			TD_MouseClicked,
-	/** Card inserted */			CR_CardInserted,
-	/** Card removed */			CR_CardRemoved,
-	/** Eject card */			CR_EjectCard,
-	/** Key pressed */			KP_KeyPressed,
+        /**
+         * Time's up for the timer
+         */
+        TimesUp,
+        /**
+         * Health poll
+         */
+        Poll,
+        /**
+         * Health poll acknowledgement
+         */
+        PollAck,
+        /**
+         * Update Display
+         */
+        TD_UpdateDisplay,
+        /**
+         * Mouse Clicked
+         */
+        TD_MouseClicked,
+        /**
+         * Card inserted
+         */
+        CR_CardInserted,
+        /**
+         * Card removed
+         */
+        CR_CardRemoved,
+        /**
+         * Eject card
+         */
+        CR_EjectCard,
+        /**
+         * Key pressed
+         */
+        KP_KeyPressed,
+
+        CashDetail,
+        ATMSS_DisplayCashDetail,
+        TD_DisplayCashDetail,
 
     } // Type
 } // Msg

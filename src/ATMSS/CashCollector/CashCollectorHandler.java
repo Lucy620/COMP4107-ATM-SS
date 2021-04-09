@@ -23,6 +23,10 @@ public class CashCollectorHandler extends HWHandler{
                 handleUpdateDisplay(msg);
                 break;
 
+            case TD_MouseClicked:
+                atmss.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
+                break;
+
             default:
                 log.warning(id + ": unknown message type: [" + msg + "]");
         }

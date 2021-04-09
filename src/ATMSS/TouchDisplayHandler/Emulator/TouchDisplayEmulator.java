@@ -20,22 +20,22 @@ import java.io.IOException;
 //======================================================================
 // TouchDisplayEmulator
 public class TouchDisplayEmulator extends TouchDisplayHandler {
-    private final int WIDTH = 680;
-    private final int HEIGHT = 520;
-    private ATMSSStarter atmssStarter;
-    private String id;
-    private String text = "";
-    private Stage myStage;
-    private TouchDisplayEmulatorController touchDisplayEmulatorController;
-    public TextField account1;
+	private final int WIDTH = 680;
+	private final int HEIGHT = 520;
+	public TextField account1;
 	public int AccountCount = 0;
-	public Label warning;
 	public TextField WithdrawalTextField;
-	public String[] AccountList = {"","","",""};
-    //------------------------------------------------------------
-    // TouchDisplayEmulator
-    public TouchDisplayEmulator(String id, ATMSSStarter atmssStarter) throws Exception {
-	super(id, atmssStarter);
+	public String[] AccountList = {"", "", "", ""};
+	private ATMSSStarter atmssStarter;
+	private String id;
+	private String text = "";
+	private Stage myStage;
+	private TouchDisplayEmulatorController touchDisplayEmulatorController;
+
+	//------------------------------------------------------------
+	// TouchDisplayEmulator
+	public TouchDisplayEmulator(String id, ATMSSStarter atmssStarter) throws Exception {
+		super(id, atmssStarter);
 	this.atmssStarter = atmssStarter;
 	this.id = id;
     } // TouchDisplayEmulator
@@ -129,7 +129,7 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 			}
 			System.out.println(account);
 			AccountList = account.split("/");
-			for (int i=0; i<AccountList.length;i++){
+			for (int i=0; i<AccountList.length; i++){
 				System.out.println(AccountList[i]);
 			}
 			TouchDisplayEmulator touchDisplayEmulator = this;
@@ -154,16 +154,100 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					}
 				}
 			});
+		} else if (msg.getDetails().startsWith("deposit")) {
+			String str = msg.getDetails();
+			String accounts = "";
+			for (int k = 7; k < str.length(); k++) {
+				accounts += str.charAt(k);
+			}
+			AccountList = accounts.split("/");
+			for (int i = 0; i < AccountList.length; i++) {
+				System.out.println(AccountList[i]);
+			}
+			TouchDisplayEmulator touchDisplayEmulator = this;
 
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						log.info(id + ": loading fxml: " + "TouchDisplayDepositSelectAccount.fxml");
 
-		}else if(msg.getDetails().startsWith("TransferAdvice")){
+						Parent root;
+						FXMLLoader loader = new FXMLLoader();
+						loader.setLocation(TouchDisplayEmulator.class.getResource("TouchDisplayDepositSelectAccount.fxml"));
+						root = loader.load();
+						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
+						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+						myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+						touchDisplayEmulatorController.updateDepositAccount(AccountList);
+					} catch (Exception e) {
+						log.severe(id + ": failed to load " + "TouchDisplayDepositSelectAccount.fxml");
+						e.printStackTrace();
+					}
+				}
+			});
+		} else if (msg.getDetails().startsWith("DisplayCashDetail")) {
+			TouchDisplayEmulator touchDisplayEmulator = this;
+
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						log.info(id + ": loading fxml: " + "TouchDisplayDeposit.fxml");
+
+						Parent root;
+						FXMLLoader loader = new FXMLLoader();
+						loader.setLocation(TouchDisplayEmulator.class.getResource("TouchDisplayDeposit.fxml"));
+						root = loader.load();
+						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
+						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+						myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+						touchDisplayEmulatorController.handleUpdateDisplay_ShowCashDetail(msg.getDetails());
+					} catch (Exception e) {
+						log.severe(id + ": failed to load " + "TouchDisplayDeposit.fxml");
+						e.printStackTrace();
+					}
+				}
+			});
+		} else if (msg.getDetails().startsWith("TransferAdvice")) {
 			String str = msg.getDetails();
 			String TransferAdvice = "";
-			for(int i = 14; i < str.length(); i++){
+			for (int i = 14; i < str.length(); i++) {
 				TransferAdvice += str.charAt(i);
 			}
 			touchDisplayEmulatorController.updateTransferAmount(TransferAdvice);
-		} else if(msg.getDetails().startsWith("amount")){
+		} else if (msg.getDetails().startsWith("DepositConfirmation")) {
+			String str = msg.getDetails();
+			String Msg = "";
+			String[] depoInfo = {"", ""};
+			for (int k = 19; k < str.length(); k++) {
+				Msg += str.charAt(k);
+			}
+			depoInfo = Msg.split("/");
+			TouchDisplayEmulator touchDisplayEmulator = this;
+
+			String[] finalDepoInfo = depoInfo;
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						log.info(id + ": loading fxml: " + "TouchDisplayDepositViewBalance.fxml");
+
+						Parent root;
+						FXMLLoader loader = new FXMLLoader();
+						loader.setLocation(TouchDisplayEmulator.class.getResource("TouchDisplayDepositViewBalance.fxml"));
+						root = loader.load();
+						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
+						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+						myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+						touchDisplayEmulatorController.UpdateDepositViewBalance(finalDepoInfo[0], finalDepoInfo[1]);
+					} catch (Exception e) {
+						log.severe(id + ": failed to load " + "TouchDisplayDepositViewBalance.fxml");
+						e.printStackTrace();
+					}
+				}
+			});
+		} else if (msg.getDetails().startsWith("amount")) {
 			String str = msg.getDetails();
 			String amount = "";
 			for (int k = 6; k < str.length(); k++) {
@@ -192,7 +276,35 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					}
 				}
 			});
+		} else if (msg.getDetails().startsWith("DepositAmount")) {
+			String str = msg.getDetails();
+			String amount = "";
+			for (int k = 13; k < str.length(); k++) {
+				amount += str.charAt(k);
+			}
+			String depositAmount = amount;
+			TouchDisplayEmulator touchDisplayEmulator = this;
 
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						log.info(id + ": loading fxml: " + "TouchDisplayEjectBalance.fxml");
+
+						Parent root;
+						FXMLLoader loader = new FXMLLoader();
+						loader.setLocation(TouchDisplayEmulator.class.getResource("TouchDisplayEjectBalance.fxml"));
+						root = loader.load();
+						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
+						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
+						myStage.setScene(new Scene(root, WIDTH, HEIGHT));
+						touchDisplayEmulatorController.DepositEjectBalance(depositAmount);
+					} catch (Exception e) {
+						log.severe(id + ": failed to load " + "TouchDisplayEjectBalance.fxml");
+						e.printStackTrace();
+					}
+				}
+			});
 		}else {
 
 			switch (msg.getDetails()) {
@@ -209,10 +321,6 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					reloadStage("TouchDisplayConfirmation.fxml");
 					break;
 
-				case "DepositConfirmation":
-					reloadStage("TouchDisplayDepositViewBalance.fxml");
-					break;
-
 				case "Withdrawal":
 					reloadStage("TouchDisplayWithdrawal.fxml");
 					break;
@@ -225,7 +333,8 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 					reloadStage("TouchDisplayWithdrawalEnterAmount.fxml");
 					break;
 
-				case "Deposit":
+
+				case "CashInsert":
 					reloadStage("TouchDisplayDeposit.fxml");
 					break;
 
