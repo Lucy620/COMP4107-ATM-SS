@@ -517,6 +517,8 @@ public class TouchDisplayEmulatorController {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "detail"+AccountList[2]));
         }else if(x >= 340 && y >= 340 && y <= 410){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "detail"+AccountList[3]));
+        }else if(x <= 300 && y >= 410 ){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
         }
     }// SelectAccount_rectangle
 

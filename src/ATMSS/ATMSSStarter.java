@@ -72,7 +72,7 @@ public class ATMSSStarter extends AppKickstarter {
 		return log;
 	} // initLogger
 
-	static class LogFormatter extends Formatter {
+	public static class LogFormatter extends Formatter {
 		//------------------------------------------------------------
 		// format
 		public String format(LogRecord rec) {
