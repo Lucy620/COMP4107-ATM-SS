@@ -357,6 +357,7 @@ public class ATMSS extends AppThread {
         if(textField.length() != 6){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Invalid Pin"));
             newPin = "";
+            textField = "";
         }else{
             String accounts = bams.chgPinReq(cardNo,oldPin,newPin,"cred-1");
             if(accounts.equals("succ")){
