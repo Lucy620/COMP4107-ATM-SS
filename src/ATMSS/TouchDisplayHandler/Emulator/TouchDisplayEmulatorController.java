@@ -182,10 +182,6 @@ public class TouchDisplayEmulatorController {
 
     }
 
-    public void SetTransferAccount(){
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, WithdrawalTextField.getText()));
-    }
-
     public void TransferClick(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
@@ -261,10 +257,15 @@ public class TouchDisplayEmulatorController {
     }
 
     public void updateTransferLabel(String[] AccountList){
-        a.setText(AccountList[0]);
-        b.setText(AccountList[1]);
-        c.setText(AccountList[2]);
-        d.setText(AccountList[3]);
+        try{
+            a.setText(AccountList[0]);
+            b.setText(AccountList[1]);
+            c.setText(AccountList[2]);
+            d.setText(AccountList[3]);
+        }catch (Exception e){
+
+        }
+
     }
 
     public void finishTransfer(MouseEvent mouseEvent){
@@ -529,11 +530,16 @@ public class TouchDisplayEmulatorController {
     }
 
     public void updateAccountLabel(String[] Accountlist_back) {
-        AccountList=Accountlist_back;
-        Account1.setText(AccountList[0]);
-        Account2.setText(AccountList[1]);
-        Account3.setText(AccountList[2]);
-        Account4.setText(AccountList[3]);
+        try{
+            AccountList=Accountlist_back;
+            Account1.setText(AccountList[0]);
+            Account2.setText(AccountList[1]);
+            Account3.setText(AccountList[2]);
+            Account4.setText(AccountList[3]);
+        }catch (Exception e){
+
+        }
+
 
     }
     public void updateAmount(String amount_back) {
@@ -545,16 +551,20 @@ public class TouchDisplayEmulatorController {
 
     public void updateTransferAmount(String amount_back) {
         amount = amount_back;
-        System.out.println("::::" + amount);
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "amount" + amount));
         amount = "";
     }
 
     public void updateDepositAccount(String[] AccountList) {
-        Account1.setText(AccountList[0]);
-        Account2.setText(AccountList[1]);
-        Account3.setText(AccountList[2]);
-        Account4.setText(AccountList[3]);
+        try{
+            Account1.setText(AccountList[0]);
+            Account2.setText(AccountList[1]);
+            Account3.setText(AccountList[2]);
+            Account4.setText(AccountList[3]);
+        }catch (Exception e){
+
+        }
+
     }
 
 
@@ -579,10 +589,6 @@ public class TouchDisplayEmulatorController {
         amount1000.setText(String.valueOf(total1000));
         totalAmount.setText(String.valueOf(total));
     }
-    public void ClearText(){
-        WithdrawalTextField.clear();
-    }
-
 
     public void UpdateDepositViewBalance(String accno, String amount_back) {
         depositAccount.setText(accno);

@@ -60,6 +60,7 @@ public class CardReaderEmulatorController {
 
 	    case "Insert Card":
 		if (cardNumField.getText().length() != 0 && CardInsert && insertcnt == 0)  {
+			System.out.println("------"+insertcnt);
 			CardInsert = false;
 			insertcnt = 1;
 		    cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.CR_CardInserted, cardNumField.getText()));

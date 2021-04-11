@@ -40,6 +40,10 @@ public class CardReaderHandler extends HWHandler {
                 handleCardRetain();
                 break;
 
+            case TD_MouseClicked:
+                clear();
+                break;
+
             default:
                 log.warning(id + ": unknown message type: [" + msg + "]");
         }
@@ -73,4 +77,8 @@ public class CardReaderHandler extends HWHandler {
         //atmss.send(new Msg(id, cardReaderMBox, Msg.Type.TD_MouseClicked, "CardRemoved"));
         log.info(id + ": card removed");
     } // handleCardRemove
+
+    protected void clear(){
+        log.info("");
+    }
 } // CardReaderHandler

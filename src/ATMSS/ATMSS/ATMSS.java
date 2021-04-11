@@ -303,6 +303,7 @@ public class ATMSS extends AppThread {
                 }else{
                     pinCount++;
                     touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "PasswordConfirm"));
+                    cardReaderMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, "clear"));
                     clearTextFiled();
                 }
                 textField="";
@@ -408,10 +409,11 @@ public class ATMSS extends AppThread {
     }
 
     public void CardRetain(){
+        cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.TimesUp, "Retain"));
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox,Msg.Type.TD_UpdateDisplay,"BlankScreen"));
         //advicePrinterMBox.send(new Msg(id, advicePrinterMBox,Msg.Type.TD_MouseClicked,"actionRetain card"));
         advicePrinterMBox.send(new Msg(id, advicePrinterMBox, Msg.Type.CR_EjectCard, "CardRetain"));
-        cardReaderMBox.send(new Msg(id, cardReaderMBox, Msg.Type.TimesUp, "Retain"));
+
         cashCollectorMBox.send(new Msg(id, cardReaderMBox, Msg.Type.TD_UpdateDisplay, "Waiting"));
         cashDispenserMBox.send(new Msg(id, cashDispenserMBox, Msg.Type.TD_UpdateDisplay, "Waiting"));
     }

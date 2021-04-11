@@ -47,7 +47,7 @@ public class AdvicePrinterEmulatorController {
     } // buttonPressed
 
     public void updateCardRetain(){
-        actionLabel.setText("Time's up!" + "\n" + "Your card is retained!");
+        actionLabel.setText("Your card is retained!");
     }
 
 

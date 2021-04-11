@@ -35,9 +35,6 @@ public class HWHandler extends AppThread {
                     quit = true;
                     break;
 
-                case TimesUp:
-                    //atmss.send(new Msg(id, mbox, Msg.Type.TimesUp, "CardRetain"));
-                    break;
 
                 default:
                     processMsg(msg);
