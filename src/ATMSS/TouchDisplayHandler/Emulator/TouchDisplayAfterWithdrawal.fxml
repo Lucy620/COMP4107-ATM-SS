@@ -10,13 +10,13 @@
         <children>
 
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" onMouseClicked="#EjectCard" stroke="BLACK" strokeType="OUTSIDE" width="500.0" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" onMouseClicked="#EjectCardandBalance" stroke="BLACK" strokeType="OUTSIDE" width="500.0" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="0.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" onMouseClicked="#EjectCardandBalanceWD" stroke="BLACK" strokeType="OUTSIDE" width="500.0" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="0.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" onMouseClicked="#EjectCardandAdvice" stroke="BLACK" strokeType="OUTSIDE" width="500.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" onMouseClicked="#EjectCardandBalanceandAdvice" stroke="BLACK" strokeType="OUTSIDE" width="500.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0" />
-            <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" onMouseClicked="#EjectCardandBalance" stroke="BLACK" strokeType="OUTSIDE" width="500.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0" />
+            <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#WDSelection" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
             <Label layoutX="104.0" layoutY="92.0" text="Please choose an option">
                 <font>
-                    <Font size="36.0" />
+                    <Font size="24.0" />
                 </font>
             </Label>
             <Label layoutX="20.0" layoutY="180.0" onMouseClicked="#EjectCard" text="Eject card only">
@@ -24,7 +24,7 @@
                     <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="20.0" layoutY="250.0" onMouseClicked="#EjectCardandBalance" text="Eject card and view balance">
+            <Label layoutX="20.0" layoutY="250.0" onMouseClicked="#EjectCardandBalanceWD" text="Eject card and view balance">
                 <font>
                     <Font size="24.0" />
                 </font>

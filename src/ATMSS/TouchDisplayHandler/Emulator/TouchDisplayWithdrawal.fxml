@@ -14,33 +14,33 @@
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="70" AnchorPane.rightAnchor="0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.leftAnchor="0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="140" AnchorPane.rightAnchor="0" />
-        <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#WaitWithdrawal" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+        <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" onMouseClicked="#WithdrawalRecAmount"  stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
         <Label layoutX="237.0" layoutY="48.0" text="Withdrawal">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-         <Label layoutX="119.0" layoutY="292.0" onMouseClicked="#WaitWithdrawal" text="\$ 400">
+         <Label layoutX="119.0" layoutY="292.0" onMouseClicked="#WithdrawalClickAmount" text="\$ 400">
             <font>
                <Font size="24.0" />
             </font>
          </Label>
-         <Label layoutX="460.0" layoutY="292.0" onMouseClicked="#WaitWithdrawal" text="\$ 800">
+         <Label layoutX="460.0" layoutY="292.0" onMouseClicked="#WithdrawalClickAmount" text="\$ 800">
             <font>
                <Font size="24.0" />
             </font>
          </Label>
-         <Label layoutX="114.0" layoutY="362.0" onMouseClicked="#WaitWithdrawal" text="\$ 1000">
+         <Label layoutX="114.0" layoutY="362.0" onMouseClicked="#WithdrawalClickAmount" text="\$ 1000">
             <font>
                <Font size="24.0" />
             </font>
          </Label>
-         <Label layoutX="455.0" layoutY="362.0" onMouseClicked="#WaitWithdrawal" text="\$ 1200">
+         <Label layoutX="455.0" layoutY="362.0" onMouseClicked="#WithdrawalClickAmount" text="\$ 1200">
             <font>
                <Font size="24.0" />
             </font>
          </Label>
-         <Label layoutX="126.0" layoutY="432.0" onMouseClicked="#BackToMenu" text="Back">
+         <Label layoutX="126.0" layoutY="432.0" onMouseClicked="#WithdrawalClickAmount" text="Back">
             <font>
                <Font size="24.0" />
             </font>

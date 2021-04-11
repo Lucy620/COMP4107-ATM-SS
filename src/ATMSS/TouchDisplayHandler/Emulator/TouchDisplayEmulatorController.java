@@ -119,8 +119,6 @@ public class TouchDisplayEmulatorController {
 
             case "EnterWithdrawal":
                 touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"EnterWithdrawal"));
-                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
-                touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
                 break;
 
             case "EnterTransfer":
@@ -146,7 +144,7 @@ public class TouchDisplayEmulatorController {
             action="Withdrawal";
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
             action="";
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Withdrawal"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Withdrawal"));
         }else if(x <= 300 && y >= 270 && y <= 340){
             action="Deposit";
             touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
@@ -178,7 +176,7 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
         action="";
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, selectedText));
-        //touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
+       // touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, selectedText));
 
     }
 
@@ -312,6 +310,17 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
     }
 
+    public void WDAdviceOnly(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdviceOnly"));
+    }
+
     public void TransferAdviceOnly(MouseEvent mouseEvent){
         System.out.println("!!!!"+amount);
         AdviceOnly(mouseEvent);
@@ -336,18 +345,28 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EnterTransfer"));
     }
 
+    public void EnterWithdrawal(){
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EnterWithdrawal"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
+    }
+
     public void Withdrawal(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
+
+        Label selectedLabel = ((Label) mouseEvent.getSource());
+        String selectedText = selectedLabel.getText();
 
         log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "Withdrawal"));
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DTWithdrawal"+selectedText));
+
     }
 
-    public void WaitWithdrawal(MouseEvent mouseEvent){
+    /*public void WaitWithdrawal(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
 
@@ -364,7 +383,7 @@ public class TouchDisplayEmulatorController {
         }
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
-    }
+    }*/
 
     public void CashCollectorOpen(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
@@ -445,6 +464,83 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WithdrawalEnterAmount"));
     }
 
+    public void WithdrawalClickAmount(MouseEvent mouseEvent) {
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        Label selectedLabel = ((Label) mouseEvent.getSource());
+
+        String str = selectedLabel.getText();
+        if (str.compareToIgnoreCase("back") == 0) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "MainMenu"));
+        } else {
+            String selectedText = "";
+            for (int k = 2; k < str.length(); k++) {
+                selectedText += str.charAt(k);
+            }
+            System.out.println(selectedText);
+
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "WDAmount" + selectedText));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
+
+            amount = "";
+        }
+    }
+
+    public void WDSelection(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        if (x <= 500 && y >= 175 && y <= 235) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
+        } else if (x <= 500 && y >= 235 && y <= 305) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectBalanceWD"));
+        } else if (x <= 500 && y >= 305 && y <= 375) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
+        } else if (x <= 500 && y >= 375 && y <= 450) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectBalance"));
+        }
+    }
+
+    public void WithdrawalRecAmount(MouseEvent mouseEvent) {
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        if (x <= 300 && y >= 270 && y <= 340) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "WDAmount400"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
+        } else if (x >= 340 && y >= 270 && y <= 340) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "WDAmount800"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
+        } else if (x <= 300 && y >= 340 && y <= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "WDAmount1000"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
+        } else if (x >= 340 && y >= 340 && y <= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "WDAmount1200"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WaitWithdrawal"));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Dispensing"));
+        } else if (x <= 300 && y >= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "MainMenu"));
+        } else if (x >= 340 && y >= 410) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "WithdrawalEnterAmount"));
+        }
+    }
+
     public void PickAction(MouseEvent mouseEvent) {
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
@@ -466,7 +562,6 @@ public class TouchDisplayEmulatorController {
     public void EjectCard(MouseEvent mouseEvent){
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
     }
 
     public void EjectCardandBalance(MouseEvent mouseEvent){
@@ -492,6 +587,19 @@ public class TouchDisplayEmulatorController {
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
     }
 
+
+    public void EjectCardandBalanceWD(MouseEvent mouseEvent){
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+        log.fine(id + ": mouse clicked: -- (" + x + ", " + y + ")");
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+
+        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectBalanceWD"));
+
+    }
+
     public void EjectCardandBalanceandAdvice(MouseEvent mouseEvent){
         int x = (int) mouseEvent.getX();
         int y = (int) mouseEvent.getY();
@@ -500,8 +608,8 @@ public class TouchDisplayEmulatorController {
 
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
 
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "EjectBalance"));
-        touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdviceOnly"));
+        WDAdviceOnly(mouseEvent);
+        EjectCardandBalanceWD(mouseEvent);
     }
 
     public void select_mouseClick(MouseEvent mouseEvent) {
@@ -518,6 +626,24 @@ public class TouchDisplayEmulatorController {
         }else if(x >= 340 && y >= 340 && y <= 410){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "detail"+AccountList[3]));
         }else if(x <= 300 && y >= 410 ){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
+        }
+    }// SelectAccount_rectangle
+
+    public void select_mouseClick_withdrawal(MouseEvent mouseEvent) {
+        int x = (int) mouseEvent.getX();
+        int y = (int) mouseEvent.getY();
+
+
+        if (x <= 300 && y >= 270 && y <= 340) {
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DTWithdrawal"+AccountList[0]));
+        }else if(x >= 340 && y >= 270 && y <= 340){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DTWithdrawal"+AccountList[1]));
+        }else if(x <= 300 && y >= 340 && y <= 410){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DTWithdrawal"+AccountList[2]));
+        }else if(x >= 340 && y >= 340 && y <= 410){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "DTWithdrawal"+AccountList[3]));
+        }else if(x <= 300 && y >= 410){
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
         }
     }// SelectAccount_rectangle
@@ -601,6 +727,10 @@ public class TouchDisplayEmulatorController {
     }
 
     public void DepositEjectBalance(String balance) {
+        ejectBalance.setText(balance);
+    }
+
+    public void WDEjectBalance(String balance) {
         ejectBalance.setText(balance);
     }
 

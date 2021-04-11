@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
+    <children>
+        <AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" onMouseClicked="#BackToMenu" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" />
+
+                <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" onMouseClicked="#finishTransfer" height="480.0" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
+                <Label layoutX="128.0" layoutY="122.0" text="Withdrawal Rejected!">
+                    <font>
+                        <Font size="36.0" />
+                    </font>
+                </Label>
+                <Label layoutX="126.0" layoutY="432.0" onMouseClicked="#BackToMenu" text="Back">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="439.0" layoutY="432.0" text="Eject Card">
+                    <font>
+                        <Font size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

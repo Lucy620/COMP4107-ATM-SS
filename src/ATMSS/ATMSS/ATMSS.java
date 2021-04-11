@@ -255,20 +255,30 @@ public class ATMSS extends AppThread {
     private void processMouseClicked(Msg msg) throws IOException, BAMSInvalidReplyException {
         if (msg.getDetails().compareToIgnoreCase("Eject Card") == 0) {
             cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
+
         } else if (msg.getDetails().compareToIgnoreCase("PrintAdvice") == 0) {
             cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
-        }  else if (msg.getDetails().compareToIgnoreCase("PrintAdviceOnly") == 0) {
+        } else if (msg.getDetails().compareToIgnoreCase("PrintAdviceOnly") == 0) {
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
         } else if (msg.getDetails().compareToIgnoreCase("Dispensing") == 0) {
-            cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Dispensing"));
+            //cashDispenserMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Dispensing"));
+            WithdrawalStart(bams);
         } else if (msg.getDetails().compareToIgnoreCase("TD_AfterDepWit") == 0) {
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "TD_AfterDepWit"));
-        } else if(msg.getDetails().compareToIgnoreCase("CollectorOpen") == 0) {
-			cashCollectorMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Open"));
-		}else if(msg.getDetails().compareToIgnoreCase("View Balance") == 0) {
+        } else if (msg.getDetails().compareToIgnoreCase("CollectorOpen") == 0) {
+            cashCollectorMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "Open"));
+        } else if (msg.getDetails().compareToIgnoreCase("View Balance") == 0) {
             GetAcc(bams);
-        }else if (msg.getDetails().compareToIgnoreCase("EnterTransfer") == 0) {
+        } else if (msg.getDetails().compareToIgnoreCase("withdrawal") == 0) {
+            GetWithdrawalAcc(bams);
+        } else if (msg.getDetails().startsWith("DTWithdrawal")){
+            setWDAccNo(msg.getDetails());
+            touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DTWithdrawal"));
+        } else if (msg.getDetails().startsWith("WDAmount")){
+            System.out.println(msg.getDetails());
+            setWDAmount(msg.getDetails());
+        } else if (msg.getDetails().compareToIgnoreCase("EnterTransfer") == 0) {
             TransferAccount(bams);
             clearTextFiled();
         } else if (msg.getDetails().startsWith("account")) {
@@ -315,6 +325,13 @@ public class ATMSS extends AppThread {
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
         } else if (msg.getDetails().compareToIgnoreCase("EjectBalance") == 0) {
             DepositBalanceEnquiry(bams);
+            accNo="";
+        } else if (msg.getDetails().compareToIgnoreCase("EjectBalanceWD") == 0) {
+            WDBalanceEnquiry(bams);
+            accNo="";
+        } else if (msg.getDetails().compareToIgnoreCase("MainMenu")==0) {
+            accNo = "";
+            touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "MainMenu"));
         }
 
 	} // processMouseClicked
@@ -394,6 +411,40 @@ public class ATMSS extends AppThread {
 
     }
 
+    private void WithdrawalStart(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+        System.out.println("Withdrawal:");
+        System.out.println("---------------"+textField);
+        System.out.println("---------------"+accNo);
+        touchDisplayMBox.send(new Msg(id,touchDisplayMBox,Msg.Type.TD_MouseClicked, "amount"+textField));
+
+        double WithdrawalAmount = bams.withdraw(cardNo, accNo, "cred-1", textField);
+        System.out.println("WithdrawalAmount: " + WithdrawalAmount);
+
+        Double intTF = Double.parseDouble(textField);
+        if(intTF%100 != 0){
+            intTF = -1.0;
+        }
+
+        if(intTF == -1.0 || WithdrawalAmount == -1.0){
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"WithdrawalFailed"));
+        }else{
+            cashDispenserMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_UpdateDisplay,"Dispensing"));
+        }
+        textField = "";
+    }
+
+    private void setWDAccNo(String detail){
+        for (int k = 12; k < detail.length(); k++) {
+            accNo += detail.charAt(k);
+        }
+    }
+
+    private void setWDAmount(String WDAmountDetail){
+        for (int k = 8; k < WDAmountDetail.length(); k++) {
+            textField += WDAmountDetail.charAt(k);
+        }
+    }
+
     private void GetAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
         System.out.println("GetAcc:");
         String accounts = bams.getAccounts(cardNo, "cred-1");
@@ -407,6 +458,13 @@ public class ATMSS extends AppThread {
         String accounts = bams.getAccounts(cardNo, "cred-1");
         System.out.println("------------------" + accounts);
         touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "deposit" + accounts));
+        System.out.println("accounts: " + accounts);
+    }
+
+    private void GetWithdrawalAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+        System.out.println("GetAcc:");
+        String accounts = bams.getAccounts(cardNo, "cred-1");
+        touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "withdrawal"+accounts));
         System.out.println("accounts: " + accounts);
     }
 
@@ -476,5 +534,13 @@ public class ATMSS extends AppThread {
         accNo = "";
         System.out.println("amount: " + amount);
         touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DepositAmount" + amount));
+    }
+
+    private void WDBalanceEnquiry(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
+        System.out.println("Enquiry:");
+        double balance = bams.enquiry(cardNo, accNo, "cred-1");
+        accNo = "";
+        System.out.println("balance: " + balance);
+        touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "WDBalance" + balance));
     }
 } // CardReaderHandler

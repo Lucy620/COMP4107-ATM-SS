@@ -125,16 +125,19 @@ public class AdvicePrinterEmulator extends AdvicePrinterHandler {
     protected void handleUpdateLabel(Msg msg) {
         if(msg.getDetails().startsWith("action")){
             String str = msg.getDetails();
+            action="";
             for (int k = 6; k < str.length(); k++) {
                 action += str.charAt(k);
             }
             //advicePrinterEmulatorController.updateActionLabel(action);
         }else if(msg.getDetails().startsWith("amount")){
             String str = msg.getDetails();
-
+            amount="";
             for (int k = 6; k < str.length(); k++) {
                 amount += str.charAt(k);
             }
+
+
 
             //advicePrinterEmulatorController.updateAmountLabel(amount);
         }
