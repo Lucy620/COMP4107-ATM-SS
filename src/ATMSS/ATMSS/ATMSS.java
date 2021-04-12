@@ -4,7 +4,9 @@ import ATMSS.BAMSHandler.BAMSHandler;
 import ATMSS.BAMSHandler.BAMSInvalidReplyException;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.logging.*;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
@@ -39,12 +41,14 @@ public class ATMSS extends AppThread {
     private int transferCount = 0;
 
     private String depositAmount = "";
-
+    private boolean hasCard = false;
     private MBox cashCollectorMBox;
     private int pinCount = 0;
 
     private String oldPin = "";
     private String newPin = "";
+
+    private int timerID;
     //------------------------------------------------------------
     // ATMSS
     public ATMSS(String id, AppKickstarter appKickstarter) throws Exception {
@@ -96,7 +100,6 @@ public class ATMSS extends AppThread {
     // run
     public void run() {
 
-        Timer.setTimer(id, mbox, pollingTime);
         log.info(id + ": starting...");
 
         cardReaderMBox = appKickstarter.getThread("CardReaderHandler").getMBox();
@@ -114,6 +117,8 @@ public class ATMSS extends AppThread {
             switch (msg.getType()) {
 
                 case TD_MouseClicked:
+                    cancelTimer();
+                    setTimer();
                     log.info("MouseCLicked: " + msg.getDetails());
                     try {
                         processMouseClicked(msg);
@@ -125,6 +130,8 @@ public class ATMSS extends AppThread {
                     break;
 
                 case KP_KeyPressed:
+                    cancelTimer();
+                    setTimer();
                     log.info("KeyPressed: " + msg.getDetails());
                     try {
                         processKeyPressed(msg);
@@ -137,13 +144,17 @@ public class ATMSS extends AppThread {
                     break;
 
                 case CR_CardInserted:
+                    setTimer();
+                    hasCard = true;
                     log.info("MouseCLicked: " + msg.getDetails());
                     cardNo=msg.getDetails();
                     cardReaderInsertPressed(msg);
                     break;
 
+
                 case CR_CardRemoved:
                     log.info("Card: " + msg.getDetails() + "removed");
+                    cancelTimer();
                     try{
                         CardRemove(bams,msg);
                     }catch (IOException e){
@@ -156,12 +167,23 @@ public class ATMSS extends AppThread {
 
                 case TimesUp:
                     Timer.setTimer(id, mbox, pollingTime);
-                    log.info("Poll: " + msg.getDetails());
-                    CardRetain();
+                    //System.out.println(pollingTime);
+
+                    if(hasCard){
+                        System.out.println("===============" + Timer.getSimulationTime());
+                        log.info("Poll: " + msg.getDetails());
+                        CardRetain();
+                        break;
+                    }else {
+                        break;
+                    }
                     //cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
                     //keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
                     //touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
                     //cashCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll,""));
+
+                case SetTimer:
+                    setTimer();
                     break;
 
                 case PollAck:
@@ -249,6 +271,15 @@ public class ATMSS extends AppThread {
 
     } // processKeyPressed
 
+    private void setTimer(){
+        timerID = (new Random()).nextInt(90000) + 10000;
+        Timer.setTimer(id,mbox, 60000,timerID);
+    }
+
+    private void cancelTimer(){
+        Timer.cancelTimer(id,mbox,timerID);
+    }
+
 
     //------------------------------------------------------------
     // processMouseClicked
@@ -257,7 +288,6 @@ public class ATMSS extends AppThread {
             cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
 
         } else if (msg.getDetails().compareToIgnoreCase("PrintAdvice") == 0) {
-            cardReaderMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, ""));
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
         } else if (msg.getDetails().compareToIgnoreCase("PrintAdviceOnly") == 0) {
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.CR_EjectCard, "Printing"));
@@ -516,6 +546,7 @@ public class ATMSS extends AppThread {
 
     public void CardRemove(BAMSHandler bams, Msg msg) throws IOException, BAMSInvalidReplyException {
         login = false;
+        hasCard = false;
         String cred = bams.logout(msg.getDetails(),"cred-1");
         System.out.println("cred: " + cred);
 

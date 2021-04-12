@@ -5,6 +5,8 @@ import ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulator;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.*;
 
+import java.lang.Thread;
+
 import java.io.IOException;
 
 
@@ -28,7 +30,8 @@ public class TouchDisplayHandler extends HWHandler {
 
             case TD_UpdateDisplay:
                 handleUpdateDisplay(msg);
-                //atmss.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, msg.getDetails()));
+                //System.currentTimeMillis() =
+                atmss.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, msg.getDetails()));
                 break;
 
 

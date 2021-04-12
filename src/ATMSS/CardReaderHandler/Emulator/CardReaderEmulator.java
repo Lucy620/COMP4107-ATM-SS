@@ -87,7 +87,7 @@ public class CardReaderEmulator extends CardReaderHandler {
 	protected void handleCardRetain(){
     	super.handleCardRetain();
 		cardReaderEmulatorController.clear();
-		System.out.println("++++++++++++++++++");
+		//System.out.println("++++++++++++++++++");
     	cardReaderEmulatorController.appendTextArea("Card Retain");
 	}
 
