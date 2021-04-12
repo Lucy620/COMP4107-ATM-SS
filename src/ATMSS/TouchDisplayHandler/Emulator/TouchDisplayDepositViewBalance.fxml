@@ -5,65 +5,56 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0"
-            prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ATMSS.TouchDisplayHandler.Emulator.TouchDisplayEmulatorController">
     <AnchorPane prefHeight="480.0" prefWidth="640.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" layoutY="410.0" stroke="BLACK"
-                       strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"/>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" layoutX="340.0" layoutY="410.0"
-                       stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0.0"
-                       AnchorPane.rightAnchor="0.0"/>
-            <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" layoutY="1.0"
-                       onMouseClicked="#DepositViewBalance" stroke="BLACK" strokeType="OUTSIDE" width="640"
-                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16b52b" height="62.0" layoutY="11.0" stroke="BLACK"
-                       strokeType="INSIDE" width="642.0"/>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" layoutY="410.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="white" height="70.0" layoutX="340.0" layoutY="410.0" stroke="BLACK" strokeType="OUTSIDE" width="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+            <Rectangle id="margin" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="480.0" layoutY="1.0" onMouseClicked="#DepositViewBalance" stroke="BLACK" strokeType="OUTSIDE" width="640" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16b52b" height="62.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="642.0" />
             <Label layoutX="189.0" layoutY="24.0" text="Your transfer is accepted">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
             <Label layoutX="189.0" layoutY="106.0" text="Deposit account:">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Label>
             <Label fx:id="depositAccount" layoutX="340.0" layoutY="106.0" prefHeight="27.0" prefWidth="154.0" text="">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Label>
             <Label layoutX="217.0" layoutY="147.0" text="Amount:">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Label>
             <Label fx:id="depositAmount" layoutX="340.0" layoutY="147.0" prefHeight="27.0" prefWidth="154.0" text="">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Label>
             <Label layoutX="215.0" layoutY="227.0" text="Please take back the notice">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Label>
             <Label layoutX="273.0" layoutY="356.0" text="Please select">
                 <font>
-                    <Font size="18.0"/>
+                    <Font size="18.0" />
                 </font>
             </Label>
-            <Label layoutX="5.0" layoutY="428.0" onMouseClicked="#EjectCardandBalance"
-                   text="Eject card and view balance">
+            <Label layoutX="5.0" layoutY="428.0" onMouseClicked="#EjectCardandBalance" text="Eject card and view balance">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
-            <Label layoutX="415.0" layoutY="428.0" onMouseClicked="#EjectCard" text="Eject card only">
+            <Label layoutX="359.0" layoutY="428.0" onMouseClicked="#EjectCardandAdvice" text="Eject card and Print advice">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
         </children>

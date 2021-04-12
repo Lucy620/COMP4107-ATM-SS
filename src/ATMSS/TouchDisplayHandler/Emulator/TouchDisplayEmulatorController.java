@@ -416,8 +416,8 @@ public class TouchDisplayEmulatorController {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectBalance"));
         } else if (x >= 340 && y >= 410) {
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, x + " " + y));
+            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
             touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "PrintAdvice"));
-            touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "EjectCard"));
         }
 
     }
@@ -560,7 +560,6 @@ public class TouchDisplayEmulatorController {
     }// SelectAccount_rectangle
 
     public void EjectCard(MouseEvent mouseEvent){
-
         touchDisplayMBox.send(new Msg(id, touchDisplayMBox, Msg.Type.TD_MouseClicked, "Eject Card"));
     }
 
@@ -734,7 +733,5 @@ public class TouchDisplayEmulatorController {
         ejectBalance.setText(balance);
     }
 
-    public void UpdateDepositAccount(String acc) {
-        Account.setText(acc);
-    }
+
 } // TouchDisplayEmulatorController
