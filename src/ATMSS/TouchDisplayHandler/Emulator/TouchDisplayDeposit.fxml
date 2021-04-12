@@ -40,7 +40,7 @@
                     <Font size="18.0"/>
                 </font>
             </Label>
-            <Label fx:id="num100" layoutX="300.0" layoutY="180.0" text="">
+            <Label fx:id="num100" layoutX="300.0" layoutY="180.0" text="0">
                 <font>
                     <Font size="18.0"/>
                 </font>
@@ -50,7 +50,7 @@
                     <Font size="18.0"/>
                 </font>
             </Label>
-            <Label fx:id="amount100" layoutX="400.0" layoutY="180.0" text="">
+            <Label fx:id="amount100" layoutX="400.0" layoutY="180.0" text="0">
                 <font>
                     <Font size="18.0"/>
                 </font>

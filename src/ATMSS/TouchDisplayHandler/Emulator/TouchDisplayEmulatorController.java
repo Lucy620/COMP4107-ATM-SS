@@ -131,7 +131,6 @@ public class TouchDisplayEmulatorController {
             default:
                 log.info(id + "KeyPressed: Enter");
         }
-        //System.out.println(WithdrawalTextField.getText());
     }
 
     //------------------------------------------------------------
@@ -175,7 +174,6 @@ public class TouchDisplayEmulatorController {
 
         Label selectedLabel = ((Label) mouseEvent.getSource());
         String selectedText = selectedLabel.getText();
-        //System.out.println(selectedText);
         action = selectedText;
         touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"action"+action));
         action="";
@@ -326,7 +324,6 @@ public class TouchDisplayEmulatorController {
     }
 
     public void TransferAdviceOnly(MouseEvent mouseEvent){
-        System.out.println("!!!!"+amount);
         AdviceOnly(mouseEvent);
         //touchDisplayMBox.send(new Msg(id,touchDisplayMBox, Msg.Type.TD_MouseClicked,"amount"+amount));
 
@@ -707,7 +704,6 @@ public class TouchDisplayEmulatorController {
         CashDetail = cashNum.split("/");
 
         cash100 += Integer.parseInt(CashDetail[0]);
-        System.out.println("---------"+cash100);
         cash500 += Integer.parseInt(CashDetail[1]);
         cash1000 += Integer.parseInt(CashDetail[2]);
 

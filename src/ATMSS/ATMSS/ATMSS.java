@@ -167,7 +167,6 @@ public class ATMSS extends AppThread {
 
                 case TimesUp:
                     Timer.setTimer(id, mbox, pollingTime);
-                    //System.out.println(pollingTime);
 
                     if(hasCard){
                         System.out.println("===============" + Timer.getSimulationTime());
@@ -177,10 +176,10 @@ public class ATMSS extends AppThread {
                     }else {
                         break;
                     }
-                    //cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-                    //keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-                    //touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
-                    //cashCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll,""));
+//                    cardReaderMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+//                    keypadMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+//                    touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.Poll, ""));
+//                    cashCollectorMBox.send(new Msg(id, mbox, Msg.Type.Poll,""));
 
                 case SetTimer:
                     setTimer();
@@ -351,7 +350,6 @@ public class ATMSS extends AppThread {
         } else if (msg.getDetails().startsWith("action")) {
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
         }else if (msg.getDetails().startsWith("amount")) {
-            System.out.println("????" + msg.getDetails());
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
         } else if (msg.getDetails().compareToIgnoreCase("EjectBalance") == 0) {
             DepositBalanceEnquiry(bams);
@@ -422,9 +420,6 @@ public class ATMSS extends AppThread {
 
     private void TransferAccount(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
         System.out.println("Transfer:");
-        System.out.println("---------------"+textField);
-        System.out.println("---------------"+fromAcc);
-        System.out.println("---------------"+toAcc);
         double transAmount = bams.transfer(cardNo, "cred-1",fromAcc, toAcc, textField);
         System.out.println("transAmount: " + transAmount);
         if(transAmount == -1.0){
@@ -442,8 +437,6 @@ public class ATMSS extends AppThread {
 
     private void WithdrawalStart(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
         System.out.println("Withdrawal:");
-        System.out.println("---------------"+textField);
-        System.out.println("---------------"+accNo);
         touchDisplayMBox.send(new Msg(id,touchDisplayMBox,Msg.Type.TD_MouseClicked, "amount"+textField));
 
         double WithdrawalAmount = bams.withdraw(cardNo, accNo, "cred-1", textField);
@@ -485,7 +478,6 @@ public class ATMSS extends AppThread {
     private void GetDepositAcc(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
         System.out.println("GetAcc:");
         String accounts = bams.getAccounts(cardNo, "cred-1");
-        System.out.println("------------------" + accounts);
         touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "deposit" + accounts));
         System.out.println("accounts: " + accounts);
     }
@@ -518,7 +510,6 @@ public class ATMSS extends AppThread {
         } else {
             toAcc = fromto;
         }
-        //System.out.println(fromAcc + "------" + toAcc);
     }
 
     private void Enquiry(BAMSHandler bams) throws BAMSInvalidReplyException, IOException {
