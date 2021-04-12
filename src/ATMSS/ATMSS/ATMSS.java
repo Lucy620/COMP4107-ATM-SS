@@ -355,7 +355,6 @@ public class ATMSS extends AppThread {
             advicePrinterMBox.send(new Msg(id, mbox, Msg.Type.TD_MouseClicked, msg.getDetails()));
         } else if (msg.getDetails().compareToIgnoreCase("EjectBalance") == 0) {
             DepositBalanceEnquiry(bams);
-            accNo="";
         } else if (msg.getDetails().compareToIgnoreCase("EjectBalanceWD") == 0) {
             WDBalanceEnquiry(bams);
             accNo="";
