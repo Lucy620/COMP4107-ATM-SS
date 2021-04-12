@@ -187,29 +187,18 @@ public class TouchDisplayEmulator extends TouchDisplayHandler {
 				}
 			});
 		} else if (msg.getDetails().startsWith("DisplayCashDetail")) {
-			TouchDisplayEmulator touchDisplayEmulator = this;
+//
+			reloadStage("TouchDisplayDeposit.fxml");
 
+		}else if(msg.getDetails().startsWith("ShowCashDetail")) {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					try {
-						log.info(id + ": loading fxml: " + "TouchDisplayDeposit.fxml");
-
-						Parent root;
-						FXMLLoader loader = new FXMLLoader();
-						loader.setLocation(TouchDisplayEmulator.class.getResource("TouchDisplayDeposit.fxml"));
-						root = loader.load();
-						touchDisplayEmulatorController = (TouchDisplayEmulatorController) loader.getController();
-						touchDisplayEmulatorController.initialize(id, atmssStarter, log, touchDisplayEmulator);
-						myStage.setScene(new Scene(root, WIDTH, HEIGHT));
-						touchDisplayEmulatorController.handleUpdateDisplay_ShowCashDetail(msg.getDetails());
-					} catch (Exception e) {
-						log.severe(id + ": failed to load " + "TouchDisplayDeposit.fxml");
-						e.printStackTrace();
-					}
+					touchDisplayEmulatorController.handleUpdateDisplay_ShowCashDetail(msg.getDetails());
 				}
 			});
-		} else if (msg.getDetails().startsWith("TransferAdvice")) {
+
+		}else if (msg.getDetails().startsWith("TransferAdvice")) {
 			String str = msg.getDetails();
 			String TransferAdvice = "";
 			for (int i = 14; i < str.length(); i++) {

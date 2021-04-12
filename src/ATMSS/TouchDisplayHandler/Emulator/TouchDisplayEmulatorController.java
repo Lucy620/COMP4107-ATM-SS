@@ -3,6 +3,7 @@ package ATMSS.TouchDisplayHandler.Emulator;
 import AppKickstarter.AppKickstarter;
 import AppKickstarter.misc.MBox;
 import AppKickstarter.misc.Msg;
+import com.sun.javaws.IconUtil;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
@@ -56,6 +57,9 @@ public class TouchDisplayEmulatorController {
     public int total100;
     public int total500;
     public int total1000;
+    public int cash100 = 0;
+    private int cash500 = 0;
+    private int cash1000 = 0;
     public int total;
 
 
@@ -698,24 +702,31 @@ public class TouchDisplayEmulatorController {
 
     public void handleUpdateDisplay_ShowCashDetail(String str) {
         String cashNum = "";
-        for (int k = 17; k < str.length(); k++) {
+        for (int k = 14; k < str.length(); k++) {
             cashNum += str.charAt(k);
         }
         String[] CashDetail = {"", "", ""};
         CashDetail = cashNum.split("/");
-        total100 += Integer.parseInt(CashDetail[0]) * 100;
-        total500 += Integer.parseInt(CashDetail[1]) * 500;
-        total1000 += Integer.parseInt(CashDetail[2]) * 1000;
-        total = total + total100 + total500 + total1000;
 
-        num100.setText(CashDetail[0]);
-        num500.setText(CashDetail[1]);
-        num1000.setText(CashDetail[2]);
+        cash100 += Integer.parseInt(CashDetail[0]);
+        System.out.println("---------"+cash100);
+        cash500 += Integer.parseInt(CashDetail[1]);
+        cash1000 += Integer.parseInt(CashDetail[2]);
+
+        total100 = cash100 * 100;
+        total500 = cash500 * 500;
+        total1000 = cash1000 * 1000;
+        total = total100 + total500 + total1000;
+
+        num100.setText(String.valueOf(cash100));
+        num500.setText(String.valueOf(cash500));
+        num1000.setText(String.valueOf(cash1000));
 
         amount100.setText(String.valueOf(total100));
         amount500.setText(String.valueOf(total500));
         amount1000.setText(String.valueOf(total1000));
         totalAmount.setText(String.valueOf(total));
+
     }
 
     public void UpdateDepositViewBalance(String accno, String amount_back) {

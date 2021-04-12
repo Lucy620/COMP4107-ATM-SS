@@ -59,7 +59,8 @@ public class CashCollectorEmulatorController {
         total500 = 500 * num500;
         total1000 = 1000 * num1000;
 
-        cashDepositCollectorMBox.send(new Msg(id, cashDepositCollectorMBox, Msg.Type.TD_MouseClicked, "DisplayCashDetail" + String.valueOf(num100) + "/" + String.valueOf(num500) + "/" + String.valueOf(num1000) + "/" + String.valueOf(totalBanknote)));
+        cashDepositCollectorMBox.send(new Msg(id, cashDepositCollectorMBox, Msg.Type.TD_MouseClicked, "ShowCashDetail" + String.valueOf(num100) + "/" + String.valueOf(num500) + "/" + String.valueOf(num1000)));
+
         cashDepositCollectorMBox.send(new Msg(id, cashDepositCollectorMBox, Msg.Type.TD_UpdateDisplay, "Waiting"));
     } // buttonPressed
 

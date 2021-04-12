@@ -334,7 +334,7 @@ public class ATMSS extends AppThread {
                 accNo += str.charAt(k);
             }
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, "DisplayCashDetail"));
-        } else if (msg.getDetails().startsWith("DisplayCashDetail")) {
+        } else if (msg.getDetails().startsWith("ShowCashDetail")) {
             log.info("DisplayCashDetail: " + msg.getDetails());
             touchDisplayMBox.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, msg.getDetails()));
         } else if (msg.getDetails().startsWith("totalAmount")) {

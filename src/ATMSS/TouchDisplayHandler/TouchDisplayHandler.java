@@ -30,7 +30,6 @@ public class TouchDisplayHandler extends HWHandler {
 
             case TD_UpdateDisplay:
                 handleUpdateDisplay(msg);
-                //System.currentTimeMillis() =
                 atmss.send(new Msg(id, mbox, Msg.Type.TD_UpdateDisplay, msg.getDetails()));
                 break;
 
